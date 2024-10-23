@@ -1,0 +1,14 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:drawable="@drawable/switch_track_on" />
+            <item android:drawable="@drawable/switch_thumb_on" android:gravity="end" />
+        </layer-list>
+    </item>
+    <item android:state_checked="false">
+        <layer-list>
+            <item android:drawable="@drawable/switch_track_off" />
+            <item android:drawable="@drawable/switch_thumb_off" android:gravity="start" />
+        </layer-list>
+    </item>
+</selector>

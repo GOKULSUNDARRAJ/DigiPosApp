@@ -1,0 +1,512 @@
+<!-- item_cardview.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/carproduct"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    tools:context=".StockDetailsActivity"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/dgblue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="goback"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
+                    android:text="Stock In Details"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/laypro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:layout_weight="1"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="ID"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Barcode"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="PLU"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Description"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Date"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Time"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Type"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Reason"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="current stock"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Stock in"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Stock out"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Scale type"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Current price"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Tille No"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="User Name"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Login id"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Short description"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:layout_weight="1"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintStart_toEndOf="@+id/layout1"
+                app:layout_constraintTop_toTopOf="@+id/layout1">
+
+                <TextView
+                    android:id="@+id/id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="ID"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/barcode1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Barcode"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/pluedt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="PLU"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Description"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Date"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Time"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/typevalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Type"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Reason"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/currentstock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="current stock"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/stockin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Stock in"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/stockout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Stock out"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/scaletype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Scale type"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/currenttype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Current price"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tillno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Tille No"
+                    android:textColor="@color/black2"
+                    android:textSize="13dp"></TextView>
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="User Name"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/loginid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Login id"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/shortdescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/semibold"
+                    android:text="Short description"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"></TextView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".PromotionAddaFragment"
+    >
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="102dp"
+            android:background="@color/dgblue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:onClick="gobackadd"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/leftarrow11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
+                    android:text="Add Promotion"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/emailtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/regular"
+            android:text="Id"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv" />
+
+
+        <TextView
+            android:id="@+id/emailtv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Promo Id"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView2"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv2" />
+
+
+        <TextView
+            android:id="@+id/emailtv23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Promotion Name"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView2"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView2" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv23" />
+
+
+        <TextView
+            android:id="@+id/emailtv235"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Recepit"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView24"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView24" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView246"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv235" />
+
+
+        <TextView
+            android:id="@+id/emailtv2356"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Rule Number"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView246"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView246" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView24676"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv2356" />
+
+        <TextView
+            android:id="@+id/emailtv23567"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Rule Value"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView24676"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView24676" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView624676"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv23567" />
+
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="type"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView624676"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView624676" />
+
+        <EditText
+            android:id="@+id/ruletype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/day"
+            app:layout_constraintTop_toBottomOf="@+id/day" />
+
+
+        <TextView
+            android:id="@+id/typevaluet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="type Value"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/ruletype"
+            app:layout_constraintTop_toBottomOf="@+id/ruletype" />
+
+        <EditText
+            android:id="@+id/typevalue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/typevaluet" />
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Start"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/typevalue"
+            app:layout_constraintTop_toBottomOf="@id/typevalue" />
+
+        <EditText
+            android:id="@+id/startedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start" />
+
+        <TextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="End"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/startedt"
+            app:layout_constraintTop_toBottomOf="@id/startedt" />
+
+
+        <EditText
+            android:id="@+id/endedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/end" />
+
+        <TextView
+            android:id="@+id/itemcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="itemcount"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/endedt"
+            app:layout_constraintTop_toBottomOf="@id/endedt" />
+
+        <EditText
+            android:id="@+id/itemcountedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemcount" />
+
+
+        <TextView
+            android:id="@+id/plu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="PLU"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/itemcountedt"
+            app:layout_constraintTop_toBottomOf="@id/itemcountedt" />
+
+        <EditText
+            android:id="@+id/pluedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/plu" />
+
+        <TextView
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Done"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/pluedt"
+            app:layout_constraintTop_toBottomOf="@id/pluedt" />
+
+
+        <EditText
+            android:id="@+id/doneedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/done" />
+
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/bluesolid"
+            android:padding="13dp"
+            android:text="ADD"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/doneedt"
+            app:layout_constraintTop_toBottomOf="@id/doneedt" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+    <item
+        android:id="@+id/navigation_Products"
+        android:title="Products"
+        android:icon="@drawable/department"/>
+    <item
+        android:id="@+id/navigation_Department"
+        android:title="Department"
+        android:icon="@drawable/products"/>
+
+    <item
+        android:id="@+id/navigation_Supplier"
+        android:title="Supplier"
+        android:icon="@drawable/suppliers"/>
+
+
+    <item
+        android:id="@+id/navigation_Helps"
+        android:title="Helps"
+        android:icon="@drawable/baseline_error_24"/>
+
+
+</menu>

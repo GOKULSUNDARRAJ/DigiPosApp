@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DigiposFinalApp"
+        tools:targetApi="31">
+        <activity
+            android:name=".UserManagmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PromotiondetailnewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivityNew"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false" />
+        <activity
+            android:name=".ProductManagmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivityNew"
+            android:exported="false" />
+        <activity
+            android:name=".BarCodeScanActivityproductreduce"
+            android:exported="false" />
+        <activity
+            android:name=".BarCodeScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductReduceAdd"
+            android:exported="false" />
+        <activity
+            android:name=".StockDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StockUpdateDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PriceChangeDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PromoDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChillerDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BrandDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SupplierDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DepartmentDetails"
+            android:exported="false" />
+        <activity
+            android:name=".StockInAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StockAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PriceChangeAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PromotionAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChillerAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BrandAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SupplierAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddDepartment"
+            android:exported="false" />
+        <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BarcodeScannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChillerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PromotionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PriceChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StockUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StockInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductReduce"
+            android:exported="false" />
+        <activity
+            android:name=".SupplierActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".AddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplachScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+

@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+    <shape>
+        <solid android:color="@color/black1" />
+
+        <corners
+            android:radius="1000dp" />
+    </shape>
+</item>
+
+
+    <item
+        android:drawable="@drawable/baseline_arrow_back_24"
+        android:gravity="end|center_vertical"/>
+
+
+</layer-list>

@@ -1,0 +1,5 @@
+<!-- res/drawable/item_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@color/green1" />
+    <item android:drawable="@color/red1" />
+</selector>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="purple_200">#2A6CCA</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <color name="blue">#2A6CCA</color>
+    <color name="green">#04a96d</color>
+    <color name="orange">#FFA10D</color>
+    <color name="gray">#9A9996</color>
+    <color name="graytin">#CEE4E4E3</color>
+    <color name="Textblue">#2682c5</color>
+    <color name="Textgray">#eeeff2</color>
+    <color name="scangray">#797979</color>
+    <color name="tabgray">#f4f5f7</color>
+    <color name="tabgray1">#E6E6E6</color>
+    <color name="tabgray2">#f5f5f5</color>
+    <color name="buttongreen">#26ad5e</color>
+    <color name="red">#ed3334</color>
+    <color name="update">#0071fe</color>
+    <color name="fabplus">#0075bd</color>
+    <color name="fabminus">#dcdce4</color>
+    <color name="lightblue">#edf0f7</color>
+    <color name="newgray">#858b91</color>
+    <color name="purple1">#5f259e</color>
+    <color name="gold">#fed687</color>
+    <color name="lightblack">#323232</color>
+    <color name="greenyellow">#26ad5e</color>
+    <color name="gray2">#f6f6f6</color>
+    <color name="lightred">#FA8072</color>
+
+    <color name="menuItemBackground">#F2F2F2</color>
+    <color name="menuItemTextColor">#333333</color>
+
+    <color name="red1">#f02829</color>
+    <color name="black1">#010101</color>
+    <color name="gray1">#c0bfc4</color>
+    <color name="green1">#26ad5e</color>
+    <color name="blue1">#1d86fc</color>
+    <color name="ligthgray1">#e7e8ea</color>
+    <color name="ligthblue1">#5e2a94</color>
+    <color name="orange1">#e67a00</color>
+    <color name="graylight2">#f8f8f8</color>
+    <color name="darkblue">#1d3050</color>
+
+    <color name="greennew">#3fbf62</color>
+    <color name="rednew">#fc4243</color>
+
+
+    <color name="gray3">#F4F2F5</color>
+
+    <color name="redColor">#FF0000</color>
+
+    <color name="line">#eaeaec</color>
+
+    <color name="black2">#343539</color>
+
+    <color name="mblue">#6b46ff</color>
+
+    <color name="dgblue">#1d86fc</color>
+    <color name="dggreen">#399e74</color>
+    <color name="dgorange">#fe9746</color>
+    <color name="dgtinblue">#1169af</color>
+    <color name="dgperple">#a45eb7</color>
+    <color name="dgrose">#dc1d76</color>
+    <color name="dgbblue">#4f64ef</color>
+    <color name="dgyellowgreen">#c8be2f</color>
+    <color name="dgyblue">#2bd8d2</color>
+
+    <color name="dgyblue5">#3daddf</color>
+    <color name="dgyblue6">#7490ef</color>
+
+
+    <color name="color1">#7ed8cc</color>
+    <color name="color2">#fca68b</color>
+    <color name="color3">#9ebef1</color>
+    <color name="color4">#f69fd6</color>
+    <color name="color5">#8786fb</color>
+    <color name="color6">#f88c8c</color>
+    <color name="color7">#8cdbf9</color>
+    <color name="color8">#bca1f2</color>
+    <color name="color9">#8cd5ca</color>
+    <color name="color10">#997fbc</color>
+    <color name="color11">#a0d69a</color>
+    <color name="color12">#ffbb94</color>
+
+    <color name="redlight">#f96767</color>
+
+    <color name="goldcolor">#feb739</color>
+    <color name="darkgray">#3d464f</color>
+
+    <color name="switch_thumb_color">#4CAF50</color> <!-- Green for thumb -->
+    <color name="switch_track_color">#B0BEC5</color>
+    <color name="lightpurple">#697ee9</color>
+
+    <color name="bluecard">#47a0ff</color>
+    <color name="greencard">#52dfc3</color>
+    <color name="yellowcard">#ffb955</color>
+    <color name="rosecard">#ff5b79</color>
+
+
+
+</resources>

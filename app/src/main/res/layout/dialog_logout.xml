@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="250dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/claer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="265dp"
+            android:background="@drawable/baseline_cancel"
+            android:elevation="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_background"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/font123"
+                android:text="No Product Available with this Barcode Value"
+                android:textColor="@color/black2"
+                android:textSize="13dp" />
+
+
+            <Button
+                android:id="@+id/editTextDialogInput"
+                android:layout_width="156dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:backgroundTint="@color/lightred"
+                android:textColor="@color/white"
+                android:fontFamily="@font/font123"
+                android:text="Add New Product"
+                android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/updateButton"
+                android:layout_width="156dp"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:background="@drawable/blackline"
+                android:text="Cancel"
+                android:textColor="@color/black" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

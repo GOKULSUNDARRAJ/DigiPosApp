@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dgblue"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:onClick="gobackadd"
+                    android:src="@drawable/baseline_clear_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
+                    android:text="Edit Product"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/regular"
+            android:text="Id"
+            android:visibility="gone"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <EditText
+            android:id="@+id/idedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            android:background="@drawable/blackline"
+            android:drawableRight="@drawable/baseline_keyboard_arrow_down_24"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/emailtv2"
+            app:layout_constraintTop_toBottomOf="@+id/id" />
+
+        <TextView
+            android:id="@+id/emailtv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="PLU"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView2"
+            app:layout_constraintTop_toBottomOf="@+id/idedt" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv2" />
+
+
+        <TextView
+            android:id="@+id/emailtv23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Barcode"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView2"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView2" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv23" />
+
+
+        <TextView
+            android:id="@+id/des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Description"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView24"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView24" />
+
+        <EditText
+            android:id="@+id/desedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/des" />
+
+        <TextView
+            android:id="@+id/emailtv235"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Sub Department"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView24"
+            app:layout_constraintTop_toBottomOf="@+id/desedt" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView246"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv235" />
+
+
+        <TextView
+            android:id="@+id/emailtv2356"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="Supplier"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView246"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView246" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView24676"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv2356" />
+
+        <TextView
+            android:id="@+id/emailtv23567"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:text="By Price"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView24676"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView24676" />
+
+        <EditText
+            android:id="@+id/autocompleteTextView624676"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailtv23567" />
+
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:visibility="gone"
+            android:text="Quantity"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView624676"
+            app:layout_constraintTop_toBottomOf="@+id/autocompleteTextView624676" />
+
+        <EditText
+            android:id="@+id/dayedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/day"
+            app:layout_constraintTop_toBottomOf="@+id/day" />
+
+        <TextView
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Department"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/autocompleteTextView624676"
+            app:layout_constraintTop_toBottomOf="@+id/dayedt" />
+
+        <EditText
+            android:id="@+id/doneedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/done" />
+
+
+        <TextView
+            android:id="@+id/stockout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="SaleWithVAT"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/doneedt"
+            app:layout_constraintTop_toBottomOf="@+id/doneedt" />
+
+
+        <EditText
+            android:id="@+id/stockinedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stockout" />
+
+
+        <TextView
+            android:id="@+id/scaltype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Discount"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/stockinedt"
+            app:layout_constraintTop_toBottomOf="@+id/stockinedt"/>
+
+
+        <EditText
+            android:id="@+id/scaltypeedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scaltype"/>
+
+
+        <TextView
+            android:id="@+id/currentprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Costpercase"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/scaltypeedt"
+            app:layout_constraintTop_toBottomOf="@+id/scaltypeedt"/>
+
+        <EditText
+            android:id="@+id/currentpriceedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentprice"/>
+
+
+        <TextView
+            android:id="@+id/tillno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Price"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/currentpriceedt"
+            app:layout_constraintTop_toBottomOf="@+id/currentpriceedt"/>
+
+
+        <EditText
+            android:id="@+id/tillnoedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tillno"/>
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="VAT"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/tillnoedt"
+            app:layout_constraintTop_toBottomOf="@+id/tillnoedt" />
+
+
+        <EditText
+            android:id="@+id/usernameedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
+
+        <TextView
+            android:id="@+id/logid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Margin"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/tillnoedt"
+            app:layout_constraintTop_toBottomOf="@+id/usernameedt" />
+
+        <EditText
+            android:id="@+id/logidedtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logid"/>
+
+
+        <TextView
+            android:id="@+id/shortdescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="AgeLimit"
+            android:textColor="@color/black1"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/logidedtn"
+            app:layout_constraintTop_toBottomOf="@+id/logidedtn" />
+
+        <EditText
+            android:id="@+id/shortdescriptionedt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blackline"
+            android:padding="13dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shortdescription" />
+
+
+        <Button
+            android:id="@+id/Add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bluesolid"
+            android:padding="13dp"
+            android:text="Update"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shortdescriptionedt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
