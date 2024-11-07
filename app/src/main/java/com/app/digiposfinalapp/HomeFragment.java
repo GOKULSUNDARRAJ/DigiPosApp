@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,12 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeFragment extends Fragment {
 
-    CardView cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,cardView8,cardView9,cardView10,cardView11,cardView12;
+    CardView cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,cardView8,cardView9,cardView10,cardView11,cardView12,cardView13,cardView14,cardView15;
 
     private DrawerLayout drawerLayout;
 
@@ -28,6 +31,34 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_home, container, false);
+
+
+
+
+        // Find the NestedScrollView
+        NestedScrollView nestedScrollView = view.findViewById(R.id.nestedScrollView);
+
+        // Get the BottomNavigationView from the MainActivity
+        LinearLayout bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+
+        // Add a scroll listener to the NestedScrollView
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // Check if we're scrolling down
+                if (scrollY > oldScrollY) {
+                    // Hide the BottomNavigationView when scrolling down
+                    bottomNavigationView.animate().translationY(bottomNavigationView.getHeight()).setDuration(300);
+                } else if (scrollY < oldScrollY) {
+                    // Show the BottomNavigationView when scrolling up
+                    bottomNavigationView.animate().translationY(0).setDuration(300);
+                }
+            }
+        });
+
+
+
+
 
         cardView1=view.findViewById(R.id.card1);
         cardView2=view.findViewById(R.id.card2);
@@ -41,6 +72,9 @@ public class HomeFragment extends Fragment {
         cardView10=view.findViewById(R.id.card10);
         cardView11=view.findViewById(R.id.card11);
         cardView12=view.findViewById(R.id.card12);
+        cardView13=view.findViewById(R.id.card13);
+        cardView14=view.findViewById(R.id.card14);
+        cardView15=view.findViewById(R.id.card15);
 
         drawerLayout =view.findViewById(R.id.drawer_layout);
         drawerToggleImageView =view.findViewById(R.id.imageView); // Initialize ImageView
@@ -125,6 +159,46 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        cardView13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                StockTakesCreateFragment productManagementFragment = new StockTakesCreateFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+                bottomNavigationView.animate().translationY(0).setDuration(300);
+            }
+        });
+
+
+        cardView14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PriceCheckFragment productManagementFragment = new PriceCheckFragment();
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+                bottomNavigationView.animate().translationY(0).setDuration(300);
+            }
+        });
+
+
+        cardView15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateaNewOrderActivity productManagementFragment = new CreateaNewOrderActivity();
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+                bottomNavigationView.animate().translationY(0).setDuration(300);
+            }
+        });
 
 
         return view;

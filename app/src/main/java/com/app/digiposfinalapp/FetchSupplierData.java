@@ -50,17 +50,17 @@ public class FetchSupplierData extends AsyncTask<Void, Void, List<SupplierSpinne
             Log.d(TAG, "Connection successful!");
 
             // SQL query to fetch data from tbl_Supplier
-            String query = "SELECT [ID], [Supplier], [Address], [Contact], [done] FROM [dbo].[tbl_Supplier]";
+            String query = "SELECT [ID], [SupplierName], [Address1], [ContactName] FROM [dbo].[tbl_Supplier]";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 SupplierSpinner supplier = new SupplierSpinner();
                 supplier.setId(resultSet.getInt("ID"));
-                supplier.setSupplier(resultSet.getString("Supplier"));
-                supplier.setAddress(resultSet.getString("Address"));
-                supplier.setContact(resultSet.getString("Contact"));
-                supplier.setDone(resultSet.getInt("done"));
+                supplier.setSupplier(resultSet.getString("SupplierName"));
+                supplier.setAddress(resultSet.getString("Address1"));
+                supplier.setContact(resultSet.getString("ContactName"));
+
 
                 supplierList.add(supplier);
                 Log.d(TAG, "Supplier added: " + supplier.getSupplier());
@@ -91,8 +91,12 @@ public class FetchSupplierData extends AsyncTask<Void, Void, List<SupplierSpinne
     protected void onPostExecute(List<SupplierSpinner> supplierList) {
         super.onPostExecute(supplierList);
 
-        SupplierSpinnerAdapter adapter = new SupplierSpinnerAdapter(context, supplierList);
-        spinner.setAdapter(adapter);
+        if (supplierList != null && !supplierList.isEmpty()) {
+            SupplierSpinnerAdapter adapter = new SupplierSpinnerAdapter(context, supplierList);
+            spinner.setAdapter(adapter);
+            Log.d(TAG, "Adapter set with " + supplierList.size() + " suppliers.");
+        } else {
+            Log.e(TAG, "No suppliers fetched or list is empty.");
+        }
     }
-
 }

@@ -1,7 +1,7 @@
 package com.app.digiposfinalapp;
 
 public class Constants {
-    public static final String DATABASE_NAME = "STAR_RETAIL1";
+    public static final String DATABASE_NAME = "STAR_RETAIL";
     public static final String USERNAME = "star";
     public static final String PASSWORD = "test@123";
     public static final String PREFS_NAME = "AppPrefs";

@@ -52,7 +52,7 @@ public class FetchSubDepartmentEdit extends AsyncTask<Void, Void, List<SubDepart
             Log.d(TAG, "Connection successful!");
 
             // Updated SQL query for tblSub_Departments
-            String query = "SELECT [AutoID], [ID], [Department], [Sub_Departments], [done] FROM [STAR_RETAIL1].[dbo].[tblSub_Departments]";
+            String query = "SELECT [AutoID], [ID], [Department], [Sub_Departments], [done] FROM [STAR_RETAIL].[dbo].[tblSub_Departments]";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
@@ -116,4 +116,5 @@ public class FetchSubDepartmentEdit extends AsyncTask<Void, Void, List<SubDepart
         // Set the spinner's selection to the first item (which is now the selected sub-department)
         spinner.setSelection(0);  // The selected sub-department is now at index 0
     }
+
 }

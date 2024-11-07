@@ -142,6 +142,8 @@ public class ProductmagementfullFragment extends Fragment {
             }
         });
 
+
+
         return view;
 
 

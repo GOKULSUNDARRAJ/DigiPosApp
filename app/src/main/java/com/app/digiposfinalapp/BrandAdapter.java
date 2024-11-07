@@ -68,6 +68,8 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
             }
         });
 
+
+
     }
 
     @Override

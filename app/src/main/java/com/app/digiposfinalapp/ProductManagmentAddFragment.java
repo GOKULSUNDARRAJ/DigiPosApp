@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -78,10 +79,38 @@ public class ProductManagmentAddFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_managment, container, false);
 
 
+
+
+        // Find the NestedScrollView
+        NestedScrollView nestedScrollView = view.findViewById(R.id.nestedScrollView);
+
+        // Get the BottomNavigationView from the MainActivity
+        LinearLayout bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+
+        // Add a scroll listener to the NestedScrollView
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // Check if we're scrolling down
+                if (scrollY > oldScrollY) {
+                    // Hide the BottomNavigationView when scrolling down
+                    bottomNavigationView.animate().translationY(bottomNavigationView.getHeight()).setDuration(300);
+                } else if (scrollY < oldScrollY) {
+                    // Show the BottomNavigationView when scrolling up
+                    bottomNavigationView.animate().translationY(0).setDuration(300);
+                }
+            }
+        });
+
+
+
+
+
         if (getArguments() != null) {
             barcodeValue = getArguments().getString("barcode");
             Pluvalu = getArguments().getString("PLU");
         }
+
         clear1=view.findViewById(R.id.clearbtn);
 
         itemcode1 = view.findViewById(R.id.itemcodeedt);
@@ -127,10 +156,8 @@ public class ProductManagmentAddFragment extends Fragment {
             }
         });
 
-
         startdate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             private boolean hasFocusedOnce = false; // Variable to track first focus
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -168,9 +195,9 @@ public class ProductManagmentAddFragment extends Fragment {
         });
 
 
+
         enddatedt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             private boolean hasFocusedOnce = false; // Variable to track first focus
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -254,6 +281,7 @@ public class ProductManagmentAddFragment extends Fragment {
         });
 
 
+
         CheckBox didCountCheckBox =view.findViewById(R.id.didcount); // Initialize your CheckBox
 
 
@@ -269,8 +297,6 @@ public class ProductManagmentAddFragment extends Fragment {
         });
 
 
-
-
         costpriceedt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -282,6 +308,7 @@ public class ProductManagmentAddFragment extends Fragment {
                     Toast.makeText(v.getContext(), "Please enter both values", Toast.LENGTH_SHORT).show();
                     return; // Exit the method
                 }
+
 
                 try {
                     // Parse the input strings to Double
@@ -328,6 +355,7 @@ public class ProductManagmentAddFragment extends Fragment {
             }
         });
 
+
         subdepartmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -344,7 +372,6 @@ public class ProductManagmentAddFragment extends Fragment {
                 // Optional: Handle case when nothing is selected
             }
         });
-
 
         supplierSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -363,18 +390,16 @@ public class ProductManagmentAddFragment extends Fragment {
             }
         });
 
-
         brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 BrandSpinner selectedBrand = (BrandSpinner) parent.getItemAtPosition(position);
                 int brandId = selectedBrand.getId(); // Get the ID of the selected brand
                 String brandName = selectedBrand.getBrand();
-                BrandDone = selectedBrand.getId();// Get the name of the selected brand
-
+                BrandDone = selectedBrand.getId();
+                // Get the name of the selected brand
                 // Display selected brand information
                 Toast.makeText(view.getContext(), "Selected: " + brandName + " (ID: " + brandId + ")", Toast.LENGTH_SHORT).show();
-
                 // Optionally, you can perform additional actions based on the selected brand
                 // For example, you can save the selected brand's ID or name for further use
             }
@@ -385,6 +410,7 @@ public class ProductManagmentAddFragment extends Fragment {
                 Toast.makeText(parent.getContext(), "No brand selected", Toast.LENGTH_SHORT).show();
             }
         });
+
 
 
         vatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -408,7 +434,6 @@ public class ProductManagmentAddFragment extends Fragment {
                 Toast.makeText(parent.getContext(), "No VAT type selected", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         ageSpinner = view.findViewById(R.id.age_spinner); // Updated ID
@@ -467,7 +492,7 @@ public class ProductManagmentAddFragment extends Fragment {
                         String.valueOf(subdepartmentId), // Sub_Department
                         supplierName,// Supplier
                         "0.00",// Buy_Price
-                        "",// Quantity
+                        "",// Quantity3
                         String.valueOf(departmentId),// Department
                         "0.00",                       // SaleWithVAT
                         "0.00",                       // Discount
@@ -519,12 +544,8 @@ public class ProductManagmentAddFragment extends Fragment {
                         " ",
                         " "
 
-
-
-
                 );
             }
-
 
         });
 
@@ -544,9 +565,6 @@ public class ProductManagmentAddFragment extends Fragment {
                 }
             }
         });
-
-
-
 
         Button addButton2 = view.findViewById(R.id.save);
         addButton2.setOnClickListener(v -> {
@@ -606,8 +624,8 @@ public class ProductManagmentAddFragment extends Fragment {
                         "0",                          // Markup
                         "0",                          // Num
                         "0",                          // Cost_Inc_VAT_1unit
-                        outerbarcodeedt.getText().toString(),//OuterBarcode
                         startdate.getText().toString(),//StartDate
+                        outerbarcodeedt.getText().toString(),//OuterBarcode
                         enddatedt.getText().toString(),//EndDate
                         String.valueOf(enableDisableValueddprice),//DD_Price
                         String.valueOf(enableDisableValuemangestock),//ManageStock
@@ -733,7 +751,7 @@ public class ProductManagmentAddFragment extends Fragment {
                             "SS_PRICE, SS_POINTS, SS_PRO_TYPE, Unit_scale, Item_code, ITEM_TYPE, FOOD_TYPE, MENU_TYPE, \n" +
                             "SUB_MENU_TYPE, MENU_TYPE_NO, SUB_PRODUCT_NO, Brand, Expiry_Date, Profit_Inc_VAT, Profit_Ex_VAT, \n" +
                             "Cost_Inc_VAT, Markup, Num, Cost_Inc_VAT_1unit,OuterBarcode,StartDate,EndDate,DD_Price,ManageStock,Weight,CurrentStock," +
-                            "AdditionalBarcode1,AdditionalBarcode2,MinStock,Reorderleve) \n" +
+                            "AdditionalBarcode1,AdditionalBarcode2,MinStock,ReorderLevel) \n" +
                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?" +
                             "      , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
                             "        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?," +
@@ -877,7 +895,6 @@ public class ProductManagmentAddFragment extends Fragment {
 
 
 
-
                     // Execute the query
                     int rowsInserted = statement.executeUpdate();
                     statement.close();
@@ -903,6 +920,7 @@ public class ProductManagmentAddFragment extends Fragment {
             Toast.makeText(requireActivity(), result, Toast.LENGTH_LONG).show();
             Log.e(TAG, "SQL Exception3: " + result);
         }
+
     }
 
 }

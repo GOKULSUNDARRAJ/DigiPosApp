@@ -61,728 +61,193 @@
 
 
 
-
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_marginTop="100dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+     >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="100dp"
-            tools:context=".HomeFragment">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
+                android:weightSum="3"
+                android:orientation="horizontal">
+
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card1"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card1"
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
+                            android:layout_height="156dp"
+                            android:background="@color/color1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color1"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/productmanagement"
+                                    />
 
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/productmanagement"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="PRODUCT \nMANAGMENT"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="PRODUCT \nMANAGMENT"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
                             </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color2"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/stock"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="STOCK"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color3"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/sales"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="SALES"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card2"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card4"
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
+                            android:layout_height="156dp"
+                            android:background="@color/color2"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color4"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/stock"
+                                    />
 
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/ddpoints"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="DD POINTS"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="STOCK"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
                             </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card5"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color5"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/ordersnew"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="ORDER"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card6"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color6"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/reports"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="REPORT"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card3"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card7"
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
+                            android:layout_height="156dp"
+                            android:background="@color/color3"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color7"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/sales"
+                                    />
 
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/promotions"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="PROMOTION"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="SALES"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
                             </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card8"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color8"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/accounts"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="ACCOOUNT"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card9"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color9"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/usermanagement"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="USER \nMANAGMENT"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="3"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">-
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card10"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color10"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/supplier"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="SUPPLIER"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card11"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color11"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/utility"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="UTILITY"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card12"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:foreground="?attr/selectableItemBackground"
-                            app:cardCornerRadius="10dp"
-                            app:cardUseCompatPadding="true">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="156dp"
-                                android:background="@color/color12"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="10dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="65dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/setup"
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="13dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:fontFamily="@font/font123"
-                                        android:maxLines="2"
-                                        android:text="GENERAL SETUP"
-                                        android:textColor="@color/white"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold"
-                                        />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
 
                 </LinearLayout>
@@ -790,9 +255,724 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color4"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ddpoints" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="DD POINTS"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color5"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ordersnew"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="ORDER"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color6"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/reports"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="REPORT"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color7"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/promotions"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="PROMOTION"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card8"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color8"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/accounts"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="ACCOOUNT"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color9"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/usermanagement"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="USER \nMANAGMENT"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">-
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color10"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/supplier"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="SUPPLIER"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color11"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/utility"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="UTILITY"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card12"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color12"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/setup"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="GENERAL SETUP"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">-
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color10"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/supplier"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="STOCK TAKES"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color4"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ddpoints" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:text="Price Check"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card15"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="156dp"
+                            android:background="@color/color4"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ddpoints" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="13dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:fontFamily="@font/font123"
+                                    android:maxLines="2"
+                                    android:textAllCaps="true"
+                                    android:text="Create New Order"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
 
         </LinearLayout>
+
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
+
+
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

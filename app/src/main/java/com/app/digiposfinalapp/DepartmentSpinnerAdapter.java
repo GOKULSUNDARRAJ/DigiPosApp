@@ -43,6 +43,7 @@ public class DepartmentSpinnerAdapter extends ArrayAdapter<Departmentspinner> {
         // Populate the data into the template view using the data object
         textView.setText(department.getDepartment());
 
+        
         return convertView;
     }
 }

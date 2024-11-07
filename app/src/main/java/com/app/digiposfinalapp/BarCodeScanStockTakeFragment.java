@@ -38,7 +38,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BarCodeScanFragment extends Fragment {
+public class BarCodeScanStockTakeFragment extends Fragment {
 
     private SurfaceView cameraPreview;
     private CameraSource cameraSource;
@@ -280,8 +280,12 @@ public class BarCodeScanFragment extends Fragment {
                         bundle.putString("Discount", discount);
 
 
+
+
+
+
                         // Create the ProductManagmentEditFragment and set arguments
-                        ProductManagmentEditFragment productManagementFragment = new ProductManagmentEditFragment();
+                        CountProductFragment productManagementFragment = new CountProductFragment();
                         productManagementFragment.setArguments(bundle); // Set the bundle as arguments
                         FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

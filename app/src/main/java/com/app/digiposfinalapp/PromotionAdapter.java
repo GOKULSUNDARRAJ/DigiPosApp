@@ -1,5 +1,6 @@
 package com.app.digiposfinalapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
         holder.enddate.setText(":" + "  " + promotion.getEnd());
         holder.status.setText(":" + "  " + promotion.getDone());
 
+
         // Using passed fragmentManager for fragment transaction
         holder.cardproduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,8 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
                 fragmentTransaction.commit();
             }
         });
+
+
     }
 
     @Override
@@ -80,6 +84,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
             enddate = itemView.findViewById(R.id.END_DATE);
             status = itemView.findViewById(R.id.STATUS);
             cardproduct = itemView.findViewById(R.id.cardproduct);
+
         }
 
         public void bind(PromotionModel promotion) {
@@ -107,6 +112,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
                     bottomSheetFragment.setDetails(view.getContext(), id, promoId, description, receipt, ruleNo, ruleValue, type, typeValue,
                             start, endDate, itemCount, plu, done);
                     bottomSheetFragment.show(fragmentManager, bottomSheetFragment.getTag()); // Use passed fragmentManager
+
                 }
             });
         }

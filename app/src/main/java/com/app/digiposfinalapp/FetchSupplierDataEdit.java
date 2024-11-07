@@ -47,22 +47,21 @@ public class FetchSupplierDataEdit extends AsyncTask<Void, Void, List<SupplierSp
         try {
             // jTDS connection string
             String url = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName + ";user=" + username + ";password=" + password;
-            Log.d(TAG, "Connecting to database...");
+            Log.d(TAG, "Connecting to database at " + ipAddress + ":" + portNumber + "/" + databaseName + "...");
             connection = DriverManager.getConnection(url);
             Log.d(TAG, "Connection successful!");
 
             // SQL query to fetch data from tbl_Supplier
-            String query = "SELECT [ID], [Supplier], [Address], [Contact], [done] FROM [dbo].[tbl_Supplier]";
+            String query = "SELECT [ID], [SupplierName], [Address1], [ContactName] FROM [dbo].[tbl_Supplier]";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 SupplierSpinner supplier = new SupplierSpinner();
                 supplier.setId(resultSet.getInt("ID"));
-                supplier.setSupplier(resultSet.getString("Supplier"));
-                supplier.setAddress(resultSet.getString("Address"));
-                supplier.setContact(resultSet.getString("Contact"));
-                supplier.setDone(resultSet.getInt("done"));
+                supplier.setSupplier(resultSet.getString("SupplierName"));
+                supplier.setAddress(resultSet.getString("Address1"));
+                supplier.setContact(resultSet.getString("ContactName"));
 
                 supplierList.add(supplier);
                 Log.d(TAG, "Supplier added: " + supplier.getSupplier());
@@ -93,6 +92,9 @@ public class FetchSupplierDataEdit extends AsyncTask<Void, Void, List<SupplierSp
     protected void onPostExecute(List<SupplierSpinner> supplierList) {
         super.onPostExecute(supplierList);
 
+        // Log the number of suppliers fetched
+        Log.d(TAG, "Suppliers fetched: " + supplierList.size());
+
         SupplierSpinner selectedSupplier = null;
 
         // Rearrange the list to put the supplier with the matching name at the top
@@ -109,11 +111,18 @@ public class FetchSupplierDataEdit extends AsyncTask<Void, Void, List<SupplierSp
             supplierList.add(0, selectedSupplier);  // Add it to the top of the list
         }
 
+        // Log the final supplier list for debugging
+        for (SupplierSpinner supplier : supplierList) {
+            Log.d(TAG, "Supplier in list: " + supplier.getSupplier());
+        }
+
         // Create and set the adapter for the spinner
         SupplierSpinnerAdapter adapter = new SupplierSpinnerAdapter(context, supplierList);
         spinner.setAdapter(adapter);
 
         // Set the spinner's selection to the first item (which is now the selected supplier)
-        spinner.setSelection(0);  // The selected supplier is now at index 0
+        if (!supplierList.isEmpty()) {
+            spinner.setSelection(0);  // The selected supplier is now at index 0
+        }
     }
 }

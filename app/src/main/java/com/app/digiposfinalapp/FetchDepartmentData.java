@@ -15,15 +15,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class FetchDepartmentData extends AsyncTask<Void, Void, List<Departmentspinner>> {
 
-    private static final String TAG = "FetchDepartmentData"; // Tag for logging
+    private static final String TAG = "FetchDepartmentData";
     private Context context;
-    private Spinner spinner;  // Spinner reference to populate
+    private Spinner spinner;
     private String ipAddress, portNumber, databaseName, username, password;
 
-    // Constructor to pass context and spinner reference
     public FetchDepartmentData(Context context, Spinner spinner) {
         this.context = context;
         this.spinner = spinner;
@@ -41,9 +39,8 @@ public class FetchDepartmentData extends AsyncTask<Void, Void, List<Departmentsp
         username = Constants.USERNAME;
         password = Constants.PASSWORD;
 
-        Connection connection = null; // Initialize connection to null
+        Connection connection = null;
         try {
-            // jTDS connection string
             String url = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName + ";user=" + username + ";password=" + password;
             Log.d(TAG, "Connecting to database...");
             connection = DriverManager.getConnection(url);
@@ -57,16 +54,18 @@ public class FetchDepartmentData extends AsyncTask<Void, Void, List<Departmentsp
                 Departmentspinner department = new Departmentspinner();
                 department.setId(resultSet.getInt("ID"));
 
-                // Get Age as a String
-                String ageString = resultSet.getString("Age");
+                String vatString = resultSet.getString("VAT");
                 try {
-                    // Try to parse Age to Integer
-                    int age = Integer.parseInt(ageString);
-                    department.setAge(age);
+                    if (vatString != null) {
+                        vatString = vatString.replaceAll("[^\\d.]", "");
+                        double vat = Double.parseDouble(vatString);
+                        department.setVat(vat);
+                    } else {
+                        department.setVat(0.0);
+                    }
                 } catch (NumberFormatException e) {
-                    // Handle invalid age value (e.g., log or set a default value)
-                    Log.e(TAG, "Invalid Age value: " + ageString + ". Defaulting to 0.");
-                    department.setAge(0); // Default value or you can choose to skip this entry
+                    Log.e(TAG, "Invalid VAT value: " + vatString + ". Defaulting to 0.");
+                    department.setVat(0.0);
                 }
 
                 department.setDepartment(resultSet.getString("Department"));
@@ -75,7 +74,6 @@ public class FetchDepartmentData extends AsyncTask<Void, Void, List<Departmentsp
                 department.setPoints(resultSet.getInt("Points"));
                 department.setDone(resultSet.getBoolean("done"));
                 department.setImage(resultSet.getString("image"));
-                department.setVat(resultSet.getDouble("VAT"));
 
                 departmentList.add(department);
                 Log.d(TAG, "Department added: " + department.getDepartment());
@@ -88,7 +86,6 @@ public class FetchDepartmentData extends AsyncTask<Void, Void, List<Departmentsp
         } catch (SQLException e) {
             Log.e(TAG, "SQL Exception: " + e.getMessage());
         } finally {
-            // Close the connection in the finally block to avoid resource leaks
             if (connection != null) {
                 try {
                     connection.close();
@@ -102,13 +99,16 @@ public class FetchDepartmentData extends AsyncTask<Void, Void, List<Departmentsp
         return departmentList;
     }
 
-
     @Override
     protected void onPostExecute(List<Departmentspinner> departmentList) {
         super.onPostExecute(departmentList);
 
-        DepartmentSpinnerAdapter adapter = new DepartmentSpinnerAdapter(context, departmentList);
-        spinner.setAdapter(adapter);
+        if (departmentList != null && !departmentList.isEmpty()) {
+            Log.d(TAG, "Setting adapter with department data.");
+            DepartmentSpinnerAdapter adapter = new DepartmentSpinnerAdapter(context, departmentList);
+            spinner.setAdapter(adapter);
+        } else {
+            Log.e(TAG, "No department data found to populate the spinner.");
+        }
     }
-
 }

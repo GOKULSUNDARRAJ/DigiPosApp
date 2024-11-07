@@ -16,17 +16,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FetchVatData extends AsyncTask<Void, Void, List<VatType>> {
+public class FetchVatEditData extends AsyncTask<Void, Void, List<VatType>> {
 
-    private static final String TAG = "FetchVatData"; // Tag for logging
+    private static final String TAG = "FetchVatEditData"; // Tag for logging
     private Context context;
     private Spinner spinner;  // Spinner reference to populate
-    private String ipAddress, portNumber, databaseName, username, password;
+    private String selectedVat; // Optional: To filter by selected VAT value
 
-    // Constructor to pass context and spinner reference
-    public FetchVatData(Context context, Spinner spinner) {
+    // Constructor to pass context, spinner reference, and optional selected VAT
+    public FetchVatEditData(Context context, Spinner spinner, String selectedVat) {
         this.context = context;
         this.spinner = spinner;
+        this.selectedVat = selectedVat; // Get the selected VAT value from arguments
     }
 
     @Override
@@ -35,11 +36,11 @@ public class FetchVatData extends AsyncTask<Void, Void, List<VatType>> {
         Log.d(TAG, "Fetching VAT data...");
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
-        ipAddress = sharedPreferences.getString(Constants.KEY_IP, "");
-        portNumber = sharedPreferences.getString(Constants.KEY_PORT, "");
-        databaseName = Constants.DATABASE_NAME;
-        username = Constants.USERNAME;
-        password = Constants.PASSWORD;
+        String ipAddress = sharedPreferences.getString(Constants.KEY_IP, "");
+        String portNumber = sharedPreferences.getString(Constants.KEY_PORT, "");
+        String databaseName = Constants.DATABASE_NAME;
+        String username = Constants.USERNAME;
+        String password = Constants.PASSWORD;
 
         Connection connection = null; // Initialize connection to null
         try {
@@ -97,6 +98,17 @@ public class FetchVatData extends AsyncTask<Void, Void, List<VatType>> {
             VatTypeAdapter adapter = new VatTypeAdapter(context, vatList);
             spinner.setAdapter(adapter);
             Log.d(TAG, "Adapter set successfully with " + vatList.size() + " items.");
+
+            // Optionally, set the spinner's selection to the selected VAT if provided
+            if (selectedVat != null) {
+                for (int i = 0; i < vatList.size(); i++) {
+                    if (vatList.get(i).getVat().equals(selectedVat)) {
+                        spinner.setSelection(i);
+                        Log.d(TAG, "Selected VAT set to: " + selectedVat);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

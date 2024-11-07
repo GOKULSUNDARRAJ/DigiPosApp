@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DigiposFinalApp"
         tools:targetApi="31">
+
+        <activity
+            android:name=".PriceCheckActivity"
+            android:exported="false" />
         <activity
             android:name=".UserManagmentActivity"
             android:exported="false" />
@@ -28,8 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivityNew"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ProductManagmentActivity"
             android:exported="false" />
@@ -128,9 +132,9 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:windowSoftInputMode="adjustPan"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".AddressActivity"
             android:exported="false" />
@@ -149,5 +153,3 @@
     </application>
 
 </manifest>
-
-

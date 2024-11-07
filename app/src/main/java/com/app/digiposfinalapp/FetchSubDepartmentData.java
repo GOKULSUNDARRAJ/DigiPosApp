@@ -50,7 +50,7 @@ public class FetchSubDepartmentData extends AsyncTask<Void, Void, List<SubDepart
             Log.d(TAG, "Connection successful!");
 
             // Updated SQL query for tblSub_Departments
-            String query = "SELECT TOP (1000) [AutoID], [ID], [Department], [Sub_Departments], [done] FROM [STAR_RETAIL1].[dbo].[tblSub_Departments]";
+            String query = "SELECT TOP (1000) [AutoID], [ID], [Department], [Sub_Departments], [done] FROM [STAR_RETAIL].[dbo].[tblSub_Departments]";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 

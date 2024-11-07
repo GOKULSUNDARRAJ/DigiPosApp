@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -36,6 +37,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -73,6 +75,26 @@ public class ProductManagmentEditFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_product_managment_edit, container, false);
+        // Find the NestedScrollView
+        NestedScrollView nestedScrollView = view.findViewById(R.id.nestedScrollView);
+
+        // Get the BottomNavigationView from the MainActivity
+        LinearLayout bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+
+        // Add a scroll listener to the NestedScrollView
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // Check if we're scrolling down
+                if (scrollY > oldScrollY) {
+                    // Hide the BottomNavigationView when scrolling down
+                    bottomNavigationView.animate().translationY(bottomNavigationView.getHeight()).setDuration(300);
+                } else if (scrollY < oldScrollY) {
+                    // Show the BottomNavigationView when scrolling up
+                    bottomNavigationView.animate().translationY(0).setDuration(300);
+                }
+            }
+        });
 
 
         // Retrieve database connection details from SharedPreferences
@@ -117,7 +139,6 @@ public class ProductManagmentEditFragment extends Fragment{
         costpriceedt=view.findViewById(R.id.costpricetxt);
 
 
-
         barcide1.setText(barcode);
         description1.setText(description);
         itemcode1.setText(Itemcode);
@@ -136,11 +157,14 @@ public class ProductManagmentEditFragment extends Fragment{
         brandSpinner=view.findViewById(R.id.spinner_brand);
         vatSpinner =view.findViewById(R.id.vat_spinner);
 
+
+
         new FetchDepartmentDataEdit(getContext(), departmentSpinner, department).execute();
         new FetchSubDepartmentEdit(getContext(), subdepartmentSpinner,subDepartment).execute();
         new FetchSupplierDataEdit(getContext(), supplierSpinner,supplier).execute();
         new FetchBrandDataEdit(getContext(), brandSpinner,Brand).execute();
         new FetchVatData(getContext(), vatSpinner).execute();
+        new FetchVatEditData(getActivity(), vatSpinner, vat).execute();
 
 
         ageSpinner = view.findViewById(R.id.age_spinner); // Updated ID
@@ -173,6 +197,7 @@ public class ProductManagmentEditFragment extends Fragment{
             }
         }
 
+
 // Set a listener for the spinner
         ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -186,8 +211,6 @@ public class ProductManagmentEditFragment extends Fragment{
                 // Optional: Handle the case when nothing is selected
             }
         });
-
-
 
 
         costpriceedt.setOnClickListener(new View.OnClickListener() {
@@ -224,6 +247,8 @@ public class ProductManagmentEditFragment extends Fragment{
             }
         });
 
+
+
         departmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -240,6 +265,7 @@ public class ProductManagmentEditFragment extends Fragment{
                 // Optional: Handle case when nothing is selected
             }
         });
+
         subdepartmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -258,6 +284,7 @@ public class ProductManagmentEditFragment extends Fragment{
         });
 
 
+
         supplierSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -274,6 +301,7 @@ public class ProductManagmentEditFragment extends Fragment{
                 // Optional: Handle case when nothing is selected
             }
         });
+
 
 
         brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -299,6 +327,7 @@ public class ProductManagmentEditFragment extends Fragment{
         });
 
 
+
         vatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -320,7 +349,6 @@ public class ProductManagmentEditFragment extends Fragment{
                 Toast.makeText(parent.getContext(), "No VAT type selected", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         Button edit1 = view.findViewById(R.id.save1);
@@ -346,6 +374,7 @@ public class ProductManagmentEditFragment extends Fragment{
                 String ss_price = sellingpriceedt.getText().toString();
                 String margin = margin1.getText().toString();
 
+
                 // Input validation
                 if (Barcode.isEmpty() || itemcode.isEmpty()) {
                     Toast.makeText(getContext(), "Barcode and Item Code cannot be empty", Toast.LENGTH_SHORT).show();
@@ -359,7 +388,6 @@ public class ProductManagmentEditFragment extends Fragment{
                 updateProduct(Barcode, itemcode, description, plu, department, subdepartment, supplier, brand, outerbarcode, agelimit, vat, unitpercase, costpercase, price, additionalbarcode1, ss_price, margin);
             }
         });
-
 
 
 
@@ -383,10 +411,6 @@ public class ProductManagmentEditFragment extends Fragment{
                 }
             }
         });
-
-
-
-
 
         radioGroupddprice =view.findViewById(R.id.ddprice); // Replace with your RadioGroup ID
         Toast.makeText(getContext(), ""+dd_Price, Toast.LENGTH_SHORT).show();
@@ -412,7 +436,6 @@ public class ProductManagmentEditFragment extends Fragment{
         });
 
 
-
         radioGroup =view.findViewById(R.id.ddpoints); // Replace with your RadioGroup ID
         if ("1".equals(ddpoint)) { // Check if dd_Price is "1"
             radioGroup.check(R.id.enable); // Replace with your RadioButton ID for ENABLE
@@ -434,8 +457,6 @@ public class ProductManagmentEditFragment extends Fragment{
                 }
             }
         });
-
-
 
 
         radioGroupManage = view.findViewById(R.id.managestocks);
@@ -468,7 +489,6 @@ public class ProductManagmentEditFragment extends Fragment{
         minstaockedt.setText(minStock);
         reorderlevel.setText(reorderleve);
 
-
         CheckBox didCountCheckBox =view.findViewById(R.id.didcount); // Initialize your CheckBox
 
 
@@ -491,6 +511,7 @@ public class ProductManagmentEditFragment extends Fragment{
         } else {
             didCountCheckBox.setChecked(false); // Uncheck the CheckBox
         }
+
 
 
         Button edit2 = view.findViewById(R.id.save);
@@ -573,10 +594,6 @@ public class ProductManagmentEditFragment extends Fragment{
 
             }
         });
-
-
-
-
 
 
         return view;
@@ -709,6 +726,7 @@ public class ProductManagmentEditFragment extends Fragment{
         return "Connection Failed";
     }
 
+
     private class UpdateProductTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -740,26 +758,25 @@ public class ProductManagmentEditFragment extends Fragment{
             String reorderlevel = params[24];
             String minstock = params[25];
             String discount = params[26];
-            String capacity1 = params[27]; // Add this line for capacity
+            String capacity1 = params[27];
             String itemCode = params[28]; // Unique identifier for the item
+            Connection connection = null;
+            PreparedStatement statement = null;
 
             try {
                 // Connect to the database
                 String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
-                Connection connection = DriverManager.getConnection(connectionUrl, username, password);
+                connection = DriverManager.getConnection(connectionUrl, username, password);
 
                 if (connection != null) {
-
-
-
                     // SQL query to update all relevant fields in the tbl_Products table
                     String sql = "UPDATE tbl_Products SET Barcode = ?, Description = ?, PLU = ?, Department = ?, Sub_department = ?, Supplier = ?, Brand = ?, " +
                             "OuterBarcode = ?, Age_Limit = ?, VAT = ?, UnitPerCase = ?, CostPerCase = ?, SS_Price = ?, AdditionalBarcode1 = ?, " +
                             "Price = ?, Margin = ?, StartDate = ?, EndDate = ?, DD_Price = ?, SS_Points = ?, ManageStock = ?, Weight = ?, " +
-                            "CurrentStock = ?, Quantity = ?, ReorderLeve = ?, MinStock = ?, Discount = ?, Capacity = ? " +
+                            "CurrentStock = ?, Quantity = ?, ReorderLevel = ?, MinStock = ?, Discount = ?, Capacity = ? " +
                             "WHERE item_code = ?";
 
-                    PreparedStatement statement = connection.prepareStatement(sql);
+                    statement = connection.prepareStatement(sql);
 
                     // Set the parameters for the update
                     statement.setString(1, barcode);
@@ -774,9 +791,9 @@ public class ProductManagmentEditFragment extends Fragment{
                     statement.setString(10, vat);
                     statement.setString(11, unitpercase);
                     statement.setString(12, costpercase);
-                    statement.setString(13, price);
+                    statement.setString(13, ss_price);
                     statement.setString(14, additionalbarcode1);
-                    statement.setString(15, ss_price);
+                    statement.setString(15, price);
                     statement.setString(16, margin);
                     statement.setString(17, startdate);
                     statement.setString(18, enddate);
@@ -795,12 +812,24 @@ public class ProductManagmentEditFragment extends Fragment{
                     // Execute the update
                     int rowsUpdated = statement.executeUpdate();
                     return (rowsUpdated > 0) ? "Update Successful" : "Update Failed";
+                } else {
+                    return "Connection Failed";
                 }
+            } catch (SQLIntegrityConstraintViolationException e) {
+                e.printStackTrace();
+                return "SQL Error: Duplicate entry for a unique field.";
             } catch (SQLException e) {
                 e.printStackTrace();
                 return "SQL Error: " + e.getMessage();
+            } finally {
+                // Close resources
+                try {
+                    if (statement != null) statement.close();
+                    if (connection != null) connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-            return "Connection Failed";
         }
 
         @Override
@@ -809,6 +838,7 @@ public class ProductManagmentEditFragment extends Fragment{
             Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
 

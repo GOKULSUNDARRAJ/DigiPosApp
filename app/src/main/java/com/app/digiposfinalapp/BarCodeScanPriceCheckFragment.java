@@ -38,7 +38,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BarCodeScanFragment extends Fragment {
+public class BarCodeScanPriceCheckFragment extends Fragment {
 
     private SurfaceView cameraPreview;
     private CameraSource cameraSource;
@@ -280,12 +280,16 @@ public class BarCodeScanFragment extends Fragment {
                         bundle.putString("Discount", discount);
 
 
+
+
+
+
                         // Create the ProductManagmentEditFragment and set arguments
-                        ProductManagmentEditFragment productManagementFragment = new ProductManagmentEditFragment();
-                        productManagementFragment.setArguments(bundle); // Set the bundle as arguments
+                        PriceCheckMainFragment PiceCheckFragment = new PriceCheckMainFragment();
+                        PiceCheckFragment.setArguments(bundle); // Set the bundle as arguments
                         FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                        fragmentTransaction.replace(R.id.frame_layout, PiceCheckFragment);
                         fragmentTransaction.addToBackStack(null); // Optional: add to back stack
                         fragmentTransaction.commit();
 
@@ -353,6 +357,8 @@ public class BarCodeScanFragment extends Fragment {
             return lastPLU;
         }
 
+
+
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
@@ -374,9 +380,6 @@ public class BarCodeScanFragment extends Fragment {
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
                 fragmentTransaction.addToBackStack(null); // Optional: add to back stack
                 fragmentTransaction.commit();
-
-
-
 
             } else {
                 Toast.makeText(requireActivity(), "No PLU found.", Toast.LENGTH_LONG).show();

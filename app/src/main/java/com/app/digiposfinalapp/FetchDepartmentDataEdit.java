@@ -18,17 +18,16 @@ import java.util.List;
 
 public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departmentspinner>> {
 
-    private static final String TAG = "FetchDepartmentDataEdit"; // Updated tag for logging
+    private static final String TAG = "FetchDepartmentDataEdit";
     private Context context;
     private Spinner spinner;
-    private String departmentID;  // To filter by department
+    private String departmentID;
     private String ipAddress, portNumber, databaseName, username, password;
 
-    // Modified constructor to accept the department string
     public FetchDepartmentDataEdit(Context context, Spinner spinner, String departmentID) {
         this.context = context;
         this.spinner = spinner;
-        this.departmentID = departmentID;  // Get the department from arguments
+        this.departmentID = departmentID;
     }
 
     @Override
@@ -45,13 +44,11 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
 
         Connection connection = null;
         try {
-            // jTDS connection string
             String url = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName + ";user=" + username + ";password=" + password;
             Log.d(TAG, "Connecting to database...");
             connection = DriverManager.getConnection(url);
             Log.d(TAG, "Connection successful!");
 
-            // Modified query to fetch all departments
             String query = "SELECT [ID], [Age], [Department], [Num], [Noshop], [Points], [done], [image], [VAT] FROM [dbo].[tbl_Departments]";
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -61,12 +58,18 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
                 Departmentspinner departmentSpinner = new Departmentspinner();
                 departmentSpinner.setId(resultSet.getInt("ID"));
 
+                // Handle age value
                 String ageString = resultSet.getString("Age");
                 try {
-                    int age = Integer.parseInt(ageString);
-                    departmentSpinner.setAge(age);
+                    if (ageString.matches("\\d+")) { // Check if it's numeric
+                        int age = Integer.parseInt(ageString);
+                        departmentSpinner.setAge(age);
+                    } else {
+                        Log.e(TAG, "Invalid Age value: " + ageString + ". Defaulting to 0.");
+                        departmentSpinner.setAge(0);
+                    }
                 } catch (NumberFormatException e) {
-                    Log.e(TAG, "Invalid Age value: " + ageString + ". Defaulting to 0.");
+                    Log.e(TAG, "Error parsing age: " + ageString + ". Defaulting to 0.");
                     departmentSpinner.setAge(0);
                 }
 
@@ -76,7 +79,19 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
                 departmentSpinner.setPoints(resultSet.getInt("Points"));
                 departmentSpinner.setDone(resultSet.getBoolean("done"));
                 departmentSpinner.setImage(resultSet.getString("image"));
-                departmentSpinner.setVat(resultSet.getDouble("VAT"));
+
+                // Handle VAT value
+                String vatString = resultSet.getString("VAT");
+                try {
+                    if (vatString.endsWith("%")) { // Strip '%' if it's there
+                        vatString = vatString.substring(0, vatString.length() - 1);
+                    }
+                    double vat = Double.parseDouble(vatString);
+                    departmentSpinner.setVat(vat);
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Error parsing VAT value: " + vatString + ". Defaulting to 0.0.");
+                    departmentSpinner.setVat(0.0);
+                }
 
                 departmentList.add(departmentSpinner);
                 Log.d(TAG, "Department added: " + departmentSpinner.getDepartment());
@@ -102,13 +117,18 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
         return departmentList;
     }
 
+
     @Override
     protected void onPostExecute(List<Departmentspinner> departmentList) {
         super.onPostExecute(departmentList);
 
+        if (departmentList == null || departmentList.isEmpty()) {
+            Log.e(TAG, "No departments fetched or list is empty.");
+            return; // Early exit if no data
+        }
+
         Departmentspinner selectedDepartment = null;
 
-        // Rearrange the list to put the department with the matching ID at the top
         for (int i = 0; i < departmentList.size(); i++) {
             Departmentspinner department = departmentList.get(i);
             if (String.valueOf(department.getId()).equals(departmentID)) {
@@ -122,15 +142,13 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
             departmentList.add(0, selectedDepartment);  // Add it to the top of the list
         }
 
-        // Create and set the adapter for the spinner
+        Log.d(TAG, "Setting adapter with departments:");
+        for (Departmentspinner dept : departmentList) {
+            Log.d(TAG, "Department: " + dept.getDepartment());
+        }
+
         DepartmentSpinnerAdapter adapter = new DepartmentSpinnerAdapter(context, departmentList);
         spinner.setAdapter(adapter);
-
-        // Set the spinner's selection to the first item (which is now the selected department)
         spinner.setSelection(0);  // The selected department is now at index 0
     }
-
-
-
-
 }
