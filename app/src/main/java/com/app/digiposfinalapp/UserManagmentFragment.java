@@ -28,12 +28,12 @@ public class UserManagmentFragment extends Fragment  implements CustomSpinner.On
 
     LinearLayout button3;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_user_managment, container, false);
+
         imageView=view.findViewById(R.id.imageView);
 
         spinner_fruits =view.findViewById(R.id.spinner_history);
@@ -43,7 +43,6 @@ public class UserManagmentFragment extends Fragment  implements CustomSpinner.On
         adapter = new FruitAdapter(getContext(), Data.getFruitList());
 
         spinner_fruits.setAdapter(adapter);
-
 
         spinner_username=view.findViewById(R.id.spinner_usernmae);
 
@@ -64,7 +63,6 @@ public class UserManagmentFragment extends Fragment  implements CustomSpinner.On
                 fragmentTransaction.commit();
             }
         });
-
 
         CheckBox myCheckBox =view.findViewById(R.id.myCheckBox);
 

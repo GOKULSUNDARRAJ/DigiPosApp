@@ -39,7 +39,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BarCodeScanPriceCheckFragment extends Fragment {
+public class BarCodeScanOrderCreateFragment extends Fragment {
 
     private SurfaceView cameraPreview;
     private CameraSource cameraSource;
@@ -49,11 +49,18 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
     private String barcodeValue;
 
     ImageView back;
-
+    private String supplierName,orderID;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_barcode_scanner, container, false);
+
+        if (getArguments() != null) {
+            supplierName = getArguments().getString("supplierName");
+            orderID = getArguments().getString("orderID");
+
+        }
+
 
         cameraPreview = view.findViewById(R.id.camera_preview);
         back=view.findViewById(R.id.imageView);
@@ -122,7 +129,6 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
             }
@@ -154,6 +160,8 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
                 }
             }
         });
+
+
 
     }
 
@@ -281,6 +289,9 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
                         bundle.putString("MinStock", minStock);
                         bundle.putString("Reorderleve", reorderleve);
                         bundle.putString("Discount", discount);
+                        bundle.putString("SupplierName", supplierName);
+                        bundle.putString("orderID", orderID);
+
 
 
 
@@ -288,7 +299,7 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
 
 
                         // Create the ProductManagmentEditFragment and set arguments
-                        PriceCheckMainFragment PiceCheckFragment = new PriceCheckMainFragment();
+                        AddOrderFragment2 PiceCheckFragment = new AddOrderFragment2();
                         PiceCheckFragment.setArguments(bundle); // Set the bundle as arguments
                         FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -406,3 +417,6 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
         }
     }
 }
+
+
+

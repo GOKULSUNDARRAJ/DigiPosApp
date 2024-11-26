@@ -38,8 +38,6 @@ public class BarcodeAdapter extends RecyclerView.Adapter<BarcodeAdapter.ViewHold
         holder.detailTextView.setText(data.getDetail());
         holder.priceTextView.setText(data.getPrice());
 
-
-
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

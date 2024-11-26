@@ -1,5 +1,6 @@
 package com.app.digiposfinalapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -16,12 +17,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeFragment extends Fragment {
 
-    CardView cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,cardView8,cardView9,cardView10,cardView11,cardView12,cardView13,cardView14,cardView15;
+    CardView cardView1,cardView2,cardView3,cardView4,cardView5,cardView6,cardView7,cardView8,cardView9,cardView10,cardView11,cardView12,cardView13,cardView14,cardView15,
+            cardView16,cardView17,cardView18;
 
     private DrawerLayout drawerLayout;
 
@@ -31,9 +32,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_home, container, false);
-
-
-
 
         // Find the NestedScrollView
         NestedScrollView nestedScrollView = view.findViewById(R.id.nestedScrollView);
@@ -56,10 +54,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-
-
-
         cardView1=view.findViewById(R.id.card1);
         cardView2=view.findViewById(R.id.card2);
         cardView3=view.findViewById(R.id.card3);
@@ -75,12 +69,17 @@ public class HomeFragment extends Fragment {
         cardView13=view.findViewById(R.id.card13);
         cardView14=view.findViewById(R.id.card14);
         cardView15=view.findViewById(R.id.card15);
+        cardView16=view.findViewById(R.id.card16);
+        cardView17=view.findViewById(R.id.card17);
+        cardView18=view.findViewById(R.id.card18);
+       
 
         drawerLayout =view.findViewById(R.id.drawer_layout);
         drawerToggleImageView =view.findViewById(R.id.imageView); // Initialize ImageView
 
         NavigationView navigationView =view.findViewById(R.id.navigation_view);
-        // Handle drawer item clicks
+
+
 
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -123,10 +122,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        cardView3.setOnClickListener(new View.OnClickListener() {
+
+        cardView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaleFragment productManagementFragment = new SaleFragment();
+                OrderCategoryFragment productManagementFragment = new OrderCategoryFragment();
                 FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
@@ -134,6 +134,20 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+
+        cardView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReportSubCategoryFragment productManagementFragment = new ReportSubCategoryFragment();
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+            }
+        });
+
 
         cardView7.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,7 +186,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         cardView14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,11 +199,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         cardView15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateaNewOrderActivity productManagementFragment = new CreateaNewOrderActivity();
+                CreateaNewOrderFragment productManagementFragment = new CreateaNewOrderFragment();
                 FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
@@ -201,6 +213,21 @@ public class HomeFragment extends Fragment {
         });
 
 
+        cardView16.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PriceReduceFragment productManagementFragment = new PriceReduceFragment();
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+
+            }
+        });
+
+
         return view;
     }
+
 }

@@ -1,6 +1,5 @@
 package com.app.digiposfinalapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class CreateaNewOrderActivity extends Fragment {
+public class CreateaNewOrderFragment extends Fragment {
 
     Spinner supplierSpinner;
     String supplierName;

@@ -79,8 +79,6 @@ public class ProductManagmentAddFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_managment, container, false);
 
 
-
-
         // Find the NestedScrollView
         NestedScrollView nestedScrollView = view.findViewById(R.id.nestedScrollView);
 
@@ -101,10 +99,6 @@ public class ProductManagmentAddFragment extends Fragment {
                 }
             }
         });
-
-
-
-
 
         if (getArguments() != null) {
             barcodeValue = getArguments().getString("barcode");
@@ -141,7 +135,6 @@ public class ProductManagmentAddFragment extends Fragment {
         barcide1.setText(barcodeValue);
 
         pludt.setText(Pluvalu);
-
 
         ImageView back =view.findViewById(R.id.imageView);
         back.setOnClickListener(new View.OnClickListener() {
@@ -193,8 +186,6 @@ public class ProductManagmentAddFragment extends Fragment {
                 }
             }
         });
-
-
 
         enddatedt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             private boolean hasFocusedOnce = false; // Variable to track first focus
@@ -389,6 +380,8 @@ public class ProductManagmentAddFragment extends Fragment {
                 // Optional: Handle case when nothing is selected
             }
         });
+
+
 
         brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

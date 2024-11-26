@@ -36,6 +36,7 @@
 
     <color name="menuItemBackground">#F2F2F2</color>
     <color name="menuItemTextColor">#333333</color>
+    <color name="lightgray1">#F5F5F5</color>
 
     <color name="red1">#f02829</color>
     <color name="black1">#010101</color>
@@ -62,6 +63,7 @@
 
     <color name="mblue">#6b46ff</color>
 
+    <color name="lightwhiteblue">#0094d1</color>
     <color name="dgblue">#1d86fc</color>
     <color name="dggreen">#399e74</color>
     <color name="dgorange">#fe9746</color>

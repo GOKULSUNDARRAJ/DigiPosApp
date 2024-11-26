@@ -1,6 +1,7 @@
 package com.app.digiposfinalapp;
 
 public class Department {
+
     private String age;
     private String name;
     private int num;

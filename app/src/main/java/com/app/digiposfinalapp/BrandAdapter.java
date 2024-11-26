@@ -39,6 +39,8 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
         holder.brand.setText(brand.getBrandName());
         holder.done.setText(String.valueOf(brand.getDone()));
 
+        
+
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,8 +69,6 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
                 view.getContext().startActivity(intent);
             }
         });
-
-
 
     }
 

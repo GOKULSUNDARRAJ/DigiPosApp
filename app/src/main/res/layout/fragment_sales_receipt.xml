@@ -70,10 +70,10 @@
                             android:layout_height="20dp"
                             android:layout_gravity="center"
                             android:src="@drawable/export"
-                            android:tint="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/textView6"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:id="@+id/textView6"
@@ -538,7 +538,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
 
-
                         </LinearLayout>
 
                         <LinearLayout
@@ -565,7 +564,6 @@
                                 android:fontFamily="@font/semibold"
                                 android:textColor="@color/black"
                                 android:textSize="13dp" />
-
 
                         </LinearLayout>
 

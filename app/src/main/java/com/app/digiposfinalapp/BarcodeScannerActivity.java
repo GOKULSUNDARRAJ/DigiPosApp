@@ -28,6 +28,8 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         // Show camera permission dialog
         requestCameraPermission();
 
+
+
     }
 
     private void requestCameraPermission() {
@@ -48,6 +50,8 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     private void startBarcodeScanner() {
         IntentIntegrator integrator = new IntentIntegrator(this);

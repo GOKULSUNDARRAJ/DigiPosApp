@@ -125,4 +125,5 @@ public class FetchSupplierDataEdit extends AsyncTask<Void, Void, List<SupplierSp
             spinner.setSelection(0);  // The selected supplier is now at index 0
         }
     }
+
 }

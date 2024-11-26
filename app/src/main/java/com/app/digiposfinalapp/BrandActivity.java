@@ -52,6 +52,7 @@ public class BrandActivity extends AppCompatActivity {
         brandList = new ArrayList<>();
         adapter = new BrandAdapter(brandList);
 
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

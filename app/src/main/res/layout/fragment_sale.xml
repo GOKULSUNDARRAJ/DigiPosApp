@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".SaleFragment">
+    tools:context=".SaleReportFragment">
 
 
     <LinearLayout
@@ -244,13 +244,14 @@
                             android:textColor="@color/black1"
                             android:textSize="13dp" />
 
-                        <EditText
+
+                        <com.app.digiposfinalapp.CustomSpinner
+                            android:id="@+id/spinner_spuulier"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="45dp"
                             android:layout_marginTop="2dp"
-                            android:background="@drawable/blackline"
-                            android:padding="13dp"
-                            android:textColor="@color/black" />
+                            android:background="@drawable/bg_spinner_fruit"
+                            android:dropDownVerticalOffset="60dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -416,11 +417,11 @@
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
                                         android:layout_gravity="center"
-                                        android:tint="@color/white"
                                         android:src="@drawable/search11"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toStartOf="@+id/textView6"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:tint="@color/white" />
 
                                     <TextView
                                         android:id="@+id/textView6"
@@ -475,10 +476,10 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:src="@drawable/add_black"
-                                    android:tint="@color/white"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/textView65"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:tint="@color/white" />
 
                                 <TextView
                                     android:id="@+id/textView65"
@@ -522,10 +523,10 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:src="@drawable/add_black"
-                                    android:tint="@color/white"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/textView61"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:tint="@color/white" />
 
                                 <TextView
                                     android:id="@+id/textView61"

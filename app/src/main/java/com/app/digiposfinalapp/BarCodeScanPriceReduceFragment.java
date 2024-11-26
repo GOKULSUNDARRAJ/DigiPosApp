@@ -4,7 +4,6 @@ import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -39,7 +38,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BarCodeScanPriceCheckFragment extends Fragment {
+public class BarCodeScanPriceReduceFragment extends Fragment {
 
     private SurfaceView cameraPreview;
     private CameraSource cameraSource;
@@ -69,8 +68,6 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-
-
 
         // Corrected line to get SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
@@ -179,7 +176,7 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
 
     private class DatabaseTask extends AsyncTask<Void, Void, Void> {
         private String plu, description, barcode, subDepartment, supplier, buyPrice, quantity, department,id,
-                saleWithVAT, discount, costPerCase, price, vat, margin, ageLimit,itemcode,Brand,UnitPerCase,currentstock,minStock,reorderleve,
+                saleWithVAT, discount, costPerCase, price, vat, margin, ageLimit,itemcode,Expiry_date,Brand,UnitPerCase,currentstock,minStock,reorderleve,
                 CostPerCase,Price,sellingprice,Margin,outerbarcode,costprice,addbarcode,startDate,enddate,dd_price,ddpoints,manageStock,weight,capatitys;
 
         @Override
@@ -222,6 +219,7 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
                         ageLimit = resultSet.getString("Age_Limit");
                         itemcode=resultSet.getString("Item_code");
                         Brand=resultSet.getString("Brand");
+                        Expiry_date=resultSet.getString("Expiry_date");
                         UnitPerCase=resultSet.getString("UnitPerCase");
                         CostPerCase=resultSet.getString("CostPerCase");
                         Price=resultSet.getString("Price");
@@ -281,14 +279,12 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
                         bundle.putString("MinStock", minStock);
                         bundle.putString("Reorderleve", reorderleve);
                         bundle.putString("Discount", discount);
+                        bundle.putString("Expiry_date", Expiry_date);
 
-
-
-
-
+                        Log.d("PriceReduceFragment", "VAT Value: " + Expiry_date);
 
                         // Create the ProductManagmentEditFragment and set arguments
-                        PriceCheckMainFragment PiceCheckFragment = new PriceCheckMainFragment();
+                        PriceReduceFragment PiceCheckFragment = new PriceReduceFragment();
                         PiceCheckFragment.setArguments(bundle); // Set the bundle as arguments
                         FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -316,8 +312,6 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
 
             return null;
         }
-
-
 
         @Override
         protected void onPostExecute(Void aVoid) {
@@ -358,9 +352,8 @@ public class BarCodeScanPriceCheckFragment extends Fragment {
                 Log.e(TAG, "SQL Exception: " + e.getMessage(), e);
             }
             return lastPLU;
+
         }
-
-
 
         @Override
         protected void onPostExecute(String result) {

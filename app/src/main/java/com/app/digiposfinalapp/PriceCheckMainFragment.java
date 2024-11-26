@@ -52,7 +52,6 @@ public class PriceCheckMainFragment extends Fragment {
         Log.d(TAG, "onCreateView: Retrieved IP: " + ipAddress + ", Port: " + portNumber);
         priceedt1=view.findViewById(R.id.priceedt);
 
-
         priceedt1.setText(price1);
 
         // Example usage of UpdatePriceTask
@@ -71,6 +70,7 @@ public class PriceCheckMainFragment extends Fragment {
         Productnametv1=view.findViewById(R.id.Productnametv);
 
         Productnametv1.setText(productDescription);
+
 
         return view;
     }
@@ -148,6 +148,9 @@ public class PriceCheckMainFragment extends Fragment {
             Log.d(TAG, "Received Barcode: " + barcode1);
         }
     }
+
+
+
 
     private void showCustomDialog() {
         // Create a custom dialog instance

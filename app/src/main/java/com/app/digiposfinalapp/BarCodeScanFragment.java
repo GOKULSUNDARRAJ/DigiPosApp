@@ -69,8 +69,6 @@ public class BarCodeScanFragment extends Fragment {
             }
         });
 
-
-
         // Corrected line to get SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
         ipAddress1 = sharedPreferences.getString(Constants.KEY_IP, "");
