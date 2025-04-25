@@ -48,4 +48,9 @@ public class SupplierSpinner {
     public void setDone(int done) {
         this.done = done;
     }
+
+    @Override
+    public String toString() {
+        return supplier; // Return the department name
+    }
 }

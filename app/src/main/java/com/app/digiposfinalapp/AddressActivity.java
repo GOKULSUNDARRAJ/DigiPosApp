@@ -1,12 +1,16 @@
 package com.app.digiposfinalapp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -36,7 +40,6 @@ public class AddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_address);
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
@@ -65,8 +68,13 @@ public class AddressActivity extends AppCompatActivity {
                 String ip = ipEditText.getText().toString().trim();
                 String port = portEditText.getText().toString().trim();
 
-                if (ip.isEmpty() || port.isEmpty()) {
-                    showToast("Please enter IP address and port");
+                if (!validateIPAddress(ip)) {
+                    showToast("Invalid IP address. Please enter a valid IP.");
+                    return;
+                }
+
+                if (!validatePort(port)) {
+                    showToast("Invalid port number. Please enter a valid port (1-65535).");
                     return;
                 }
 
@@ -80,6 +88,34 @@ public class AddressActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences2 = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         ipAddress = sharedPreferences2.getString(Constants.KEY_IP, "");
         portNumber = sharedPreferences2.getString(Constants.KEY_PORT, "");
+
+
+
+        ipEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+                v.clearFocus(); // Hide keyboard
+                return true;
+            }
+            return false;
+        });
+
+        portEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+                v.clearFocus(); // Hide keyboard
+                return true;
+            }
+            return false;
+        });
 
 
     }
@@ -167,4 +203,18 @@ public class AddressActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    private boolean validateIPAddress(String ip) {
+        String ipPattern =
+                "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+        return ip.matches(ipPattern);
+    }
+
+    private boolean validatePort(String port) {
+        try {
+            int portNumber = Integer.parseInt(port);
+            return portNumber >= 1 && portNumber <= 65535;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }

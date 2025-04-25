@@ -21,7 +21,7 @@ public class BrandSpinnerAdapter extends ArrayAdapter<BrandSpinner> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_spinner_item, parent, false);
         }
-
+        convertView.setPadding(20, 20, 20, 20);
         TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
         textView.setText(brand.getBrand());
 
@@ -34,7 +34,7 @@ public class BrandSpinnerAdapter extends ArrayAdapter<BrandSpinner> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
         }
-
+        convertView.setPadding(20, 20, 20, 20);
         TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
         textView.setText(brand.getBrand());
 
@@ -42,4 +42,6 @@ public class BrandSpinnerAdapter extends ArrayAdapter<BrandSpinner> {
 
 
     }
+
+
 }

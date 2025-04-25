@@ -177,4 +177,10 @@ public class HomeActivity extends AppCompatActivity {
     public void gotoAddressactivity(View view) {
         startActivity(new Intent(view.getContext(),AddressActivity.class));
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(HomeActivity.this,SeparateActivity.class));
+    }
 }

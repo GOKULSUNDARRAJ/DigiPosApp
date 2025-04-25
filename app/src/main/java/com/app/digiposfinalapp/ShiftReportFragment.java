@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,6 +28,8 @@ import java.util.Calendar;
 
 import android.os.AsyncTask;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +46,6 @@ public class ShiftReportFragment extends Fragment {
     private LogAdapter logAdapter;
     private List<LogEntry> logList;
     private String ipAddress1, portNumber1, databaseName1, dbUsername1, dbPassword1;
-
     Spinner tillNoSpinner;
     EditText startdate, enddatedt;
     String tillNo;
@@ -55,7 +60,6 @@ public class ShiftReportFragment extends Fragment {
 
         // Get the BottomNavigationView from the MainActivity
         ConstraintLayout bottomNavigationView = view.findViewById(R.id.bottom_navigation1);
-
         // Add a scroll listener to the NestedScrollView
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -70,8 +74,18 @@ public class ShiftReportFragment extends Fragment {
                 }
             }
         });
-
-
+        ImageView back =view.findViewById(R.id.imageView);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReportSubCategoryFragment productManagementFragment = new ReportSubCategoryFragment();
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+            }
+        });
 
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
         ipAddress1 = sharedPreferences.getString(Constants.KEY_IP, "");
@@ -84,7 +98,6 @@ public class ShiftReportFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
         // Fetch data from the database with filters
         startdate = view.findViewById(R.id.startdate);
@@ -127,11 +140,8 @@ public class ShiftReportFragment extends Fragment {
             }
         });
 
-
-
         enddatedt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             private boolean hasFocusedOnce = false; // Variable to track first focus
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -165,8 +175,6 @@ public class ShiftReportFragment extends Fragment {
             }
         });
 
-
-
         tillNoSpinner = view.findViewById(R.id.spinner_tillno);
 
         new FetchTillNoData(getContext(), tillNoSpinner).execute();
@@ -191,8 +199,6 @@ public class ShiftReportFragment extends Fragment {
             }
         });
 
-
-
         view.findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,13 +208,10 @@ public class ShiftReportFragment extends Fragment {
                 String originalDateend = enddatedt.getText().toString().trim(); // Trim to remove extra spaces
                 String modifiedDateend = originalDateend.replace("-", ""); // Replace dashes with empty string
 
-
                 new FetchDataAsyncTask().execute(modifiedDate, modifiedDateend, String.valueOf(tillId));
 
             }
         });
-
-
 
         return view;
     }
@@ -237,7 +240,6 @@ public class ShiftReportFragment extends Fragment {
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
-
                     int id = resultSet.getInt("ID");
                     String logID = resultSet.getString("LogID");
                     String userID = resultSet.getString("UserID");
@@ -260,7 +262,6 @@ public class ShiftReportFragment extends Fragment {
             return logEntries;
         }
 
-
         @Override
         protected void onPostExecute(List<LogEntry> logEntries) {
             logList = logEntries;
@@ -277,4 +278,20 @@ public class ShiftReportFragment extends Fragment {
         }
 
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
+        }
+    }
+
 }

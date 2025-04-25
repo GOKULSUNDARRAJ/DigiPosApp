@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -18,8 +19,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -60,7 +63,7 @@ public class BarCodeScanPriceReduceFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment productManagementFragment = new HomeFragment();
+                PriceReduceFragment productManagementFragment = new PriceReduceFragment();
                 FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
@@ -68,7 +71,6 @@ public class BarCodeScanPriceReduceFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-
         // Corrected line to get SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
         ipAddress1 = sharedPreferences.getString(Constants.KEY_IP, "");
@@ -99,7 +101,7 @@ public class BarCodeScanPriceReduceFragment extends Fragment {
     private void startCameraPreview() {
 
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(requireContext())
-                .setBarcodeFormats(Barcode.ALL_FORMATS)
+                .setBarcodeFormats(Barcode.CODE_128 | Barcode.CODE_39 | Barcode.EAN_13 | Barcode.UPC_A)
                 .build();
 
         cameraSource = new CameraSource.Builder(requireContext(), barcodeDetector)
@@ -133,6 +135,8 @@ public class BarCodeScanPriceReduceFragment extends Fragment {
 
         });
 
+
+
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
@@ -151,6 +155,9 @@ public class BarCodeScanPriceReduceFragment extends Fragment {
                 }
             }
         });
+
+
+
 
     }
 
@@ -199,6 +206,7 @@ public class BarCodeScanPriceReduceFragment extends Fragment {
                  PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
                 preparedStatement.setString(1, filterValue); // Set search query as the filter
+
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         id = resultSet.getString("PLU");
@@ -333,69 +341,78 @@ public class BarCodeScanPriceReduceFragment extends Fragment {
     private class GetLastPLUTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
-            String lastPLU = null;
+            String maxPLU = null;
 
             try {
                 String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress1 + ":" + portNumber1 + "/" + databaseName1;
                 try (Connection connection = DriverManager.getConnection(connectionUrl, dbUsername1, dbPassword1)) {
-                    // SQL query to get the last PLU value
-                    String sql = "SELECT TOP 1 PLU FROM tbl_Products ORDER BY ID DESC"; // Assuming ID is auto-incremented
+                    // SQL query to get the maximum PLU value
+                    String sql = "SELECT MAX(CAST(PLU AS BIGINT)) AS MaxPLU FROM tbl_Products WHERE ISNUMERIC(PLU) = 1";
                     try (PreparedStatement statement = connection.prepareStatement(sql);
                          ResultSet resultSet = statement.executeQuery()) {
 
                         if (resultSet.next()) {
-                            lastPLU = resultSet.getString("PLU");
+                            maxPLU = resultSet.getString("MaxPLU");
                         }
                     }
                 }
             } catch (SQLException e) {
                 Log.e(TAG, "SQL Exception: " + e.getMessage(), e);
             }
-            return lastPLU;
-
+            return maxPLU;
         }
 
         @Override
         protected void onPostExecute(String result) {
-            if (result != null) {
-                // Do something with the last PLU, like updating the UI
-                Toast.makeText(requireActivity(), "Last PLU: " + result, Toast.LENGTH_LONG).show();
-
+            try {
                 // Create a new Bundle to pass the barcode value
                 Bundle bundle = new Bundle();
-                bundle.putString("barcode", barcodeValue); // Send the barcode value
-                bundle.putString("PLU", String.valueOf(Integer.parseInt(result)+1)); // Send the barcode value
+                bundle.putString("barcode", barcodeValue);
+                bundle.putString("fromPriceSubFragment", "fromPriceSubFragment");
 
-                // Create the ProductManagmentAddFragment and set arguments
+                // Handle PLU value safely
+                int pluValue;
+                if (result != null && !result.trim().isEmpty()) {
+                    try {
+                        pluValue = Integer.parseInt(result.trim()) + 1;
+                    } catch (NumberFormatException e) {
+                        pluValue = 3001; // Default value if parsing fails
+                    }
+                } else {
+                    pluValue = 3001; // Default value if result is null or empty
+                }
+                bundle.putString("PLU", String.valueOf(pluValue));
+
+                // Create and show the fragment
                 ProductManagmentAddFragment productManagementFragment = new ProductManagmentAddFragment();
-                productManagementFragment.setArguments(bundle); // Set the bundle with the barcode value
+                productManagementFragment.setArguments(bundle);
 
-                // Perform fragment transaction to display ProductManagmentAddFragment
-                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager()
+                FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
-                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
-            } else {
-                Toast.makeText(requireActivity(), "No PLU found.", Toast.LENGTH_LONG).show();
-
-                // Create a new Bundle to pass the barcode value
-                Bundle bundle = new Bundle();
-                bundle.putString("barcode", barcodeValue); // Send the barcode value
-                bundle.putString("PLU", "3001"); // Send the barcode value
-
-                // Create the ProductManagmentAddFragment and set arguments
-                ProductManagmentAddFragment productManagementFragment = new ProductManagmentAddFragment();
-                productManagementFragment.setArguments(bundle); // Set the bundle with the barcode value
-
-                // Perform fragment transaction to display ProductManagmentAddFragment
-                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager()
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
-                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
-                fragmentTransaction.commit();
+            } catch (Exception e) {
+                Log.e(TAG, "Error in onPostExecute: ", e);
+                Toast.makeText(requireActivity(), "Error occurred", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
         }
     }
 }

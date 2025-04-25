@@ -28,4 +28,10 @@ public class BrandSpinner {
     public void setDone(int done) {
         this.done = done;
     }
+
+    // Override toString() to return the department name
+    @Override
+    public String toString() {
+        return brand; // Return the department name
+    }
 }

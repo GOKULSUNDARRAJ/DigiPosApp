@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -30,7 +31,6 @@ public class BarCodeScanActivityproductreduce extends AppCompatActivity {
     private CameraSource cameraSource;
     private boolean isBarcodeDetected = false;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -73,7 +73,9 @@ public class BarCodeScanActivityproductreduce extends AppCompatActivity {
                             != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
+
                     cameraSource.start(cameraPreview.getHolder());
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -81,6 +83,7 @@ public class BarCodeScanActivityproductreduce extends AppCompatActivity {
 
             @Override
             public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+
             }
 
             @Override
@@ -114,6 +117,7 @@ public class BarCodeScanActivityproductreduce extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -127,4 +131,5 @@ public class BarCodeScanActivityproductreduce extends AppCompatActivity {
             }
         }
     }
+
 }

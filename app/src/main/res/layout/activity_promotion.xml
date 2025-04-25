@@ -57,11 +57,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
                                 android:layout_gravity="center"
-                                android:tint="@color/white"
                                 android:src="@drawable/add_black"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/textView6"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/white" />
 
                             <TextView
                                 android:id="@+id/textView6"
@@ -200,7 +200,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
                 android:background="@drawable/topbarbg"
                 app:layout_collapseMode="pin">
 

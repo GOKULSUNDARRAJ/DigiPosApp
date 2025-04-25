@@ -62,6 +62,7 @@ public class StockUpdateAdapter extends RecyclerView.Adapter<StockUpdateAdapter.
                 // Get the clicked item's position
                 int position = holder.getAdapterPosition();
 
+
                 // Get the corresponding StockUpdateModel object
                 StockUpdateModel clickedStockUpdate = stockUpdateList.get(position);
 
@@ -82,6 +83,8 @@ public class StockUpdateAdapter extends RecyclerView.Adapter<StockUpdateAdapter.
                 view.getContext().startActivity(intent);
             }
         });
+
+
 
 
 

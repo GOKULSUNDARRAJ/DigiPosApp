@@ -18,7 +18,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="102dp"
+            android:layout_height="70dp"
             android:background="@drawable/topbarbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp">
+                >
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -220,13 +220,14 @@
                         android:textSize="13dp"
                         android:textStyle="bold" />
 
-                    <EditText
+
+                    <com.app.digiposfinalapp.CustomSpinner
+                        android:id="@+id/spinner_subdepartment"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/blackline"
-                        android:padding="13dp"
-                        android:textColor="@color/black" />
+                        android:background="@drawable/bg_spinner_fruit"
+                        android:dropDownVerticalOffset="60dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -246,13 +247,13 @@
                         android:textSize="13dp"
                         android:textStyle="bold" />
 
-                    <EditText
+                    <com.app.digiposfinalapp.CustomSpinner
+                        android:id="@+id/spinner_spuulier"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/blackline"
-                        android:padding="13dp"
-                        android:textColor="@color/black" />
+                        android:background="@drawable/bg_spinner_fruit"
+                        android:dropDownVerticalOffset="60dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -272,13 +273,13 @@
                         android:textSize="13dp"
                         android:textStyle="bold" />
 
-                    <EditText
+                    <com.app.digiposfinalapp.CustomSpinner
+                        android:id="@+id/spinner_brand"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/blackline"
-                        android:padding="13dp"
-                        android:textColor="@color/black" />
+                        android:background="@drawable/bg_spinner_fruit"
+                        android:dropDownVerticalOffset="60dp" />
                 </LinearLayout>
 
 

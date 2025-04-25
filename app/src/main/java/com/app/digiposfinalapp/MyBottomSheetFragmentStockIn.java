@@ -180,6 +180,7 @@ public class MyBottomSheetFragmentStockIn extends BottomSheetDialogFragment {
                 preparedStatement.setString(16, (String) params[15]);
                 preparedStatement.setInt(17, id1);
 
+
                 // Execute the update
                 int rowsUpdated = preparedStatement.executeUpdate();
                 return rowsUpdated > 0;

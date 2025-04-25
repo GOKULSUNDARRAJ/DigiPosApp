@@ -6,7 +6,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Spinner;
+import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,16 +19,16 @@ import java.util.List;
 
 public class FetchBrandDataEdit extends AsyncTask<Void, Void, List<BrandSpinner>> {
 
-    private static final String TAG = "FetchBrandData"; // Tag for logging
+    private static final String TAG = "FetchBrandDataEdit"; // Tag for logging
     private Context context;
-    private Spinner spinner;  // Spinner reference to populate
-    private String selectedBrandID; // Optional: To filter by selected brand ID
+    private AutoCompleteTextView autoCompleteTextView;  // AutoCompleteTextView reference to populate
+    private String selectedBrandName; // Use brand name instead of ID
 
-    // Constructor to pass context, spinner reference, and optional selected brand ID
-    public FetchBrandDataEdit(Context context, Spinner spinner, String selectedBrandID) {
+    // Constructor to pass context, AutoCompleteTextView reference, and selected brand name
+    public FetchBrandDataEdit(Context context, AutoCompleteTextView autoCompleteTextView, String selectedBrandName) {
         this.context = context;
-        this.spinner = spinner;
-        this.selectedBrandID = selectedBrandID; // Get the selected brand ID from arguments
+        this.autoCompleteTextView = autoCompleteTextView;
+        this.selectedBrandName = selectedBrandName; // Get the selected brand name from arguments
     }
 
     @Override
@@ -71,7 +72,6 @@ public class FetchBrandDataEdit extends AsyncTask<Void, Void, List<BrandSpinner>
 
         } catch (SQLException e) {
             Log.e(TAG, "SQL Exception: " + e.getMessage());
-            // Optional: Handle the error to inform the user, e.g., showing a Toast
         } finally {
             if (connection != null) {
                 try {
@@ -90,29 +90,52 @@ public class FetchBrandDataEdit extends AsyncTask<Void, Void, List<BrandSpinner>
     protected void onPostExecute(List<BrandSpinner> brandList) {
         super.onPostExecute(brandList);
 
+        if (brandList == null || brandList.isEmpty()) {
+            Log.e(TAG, "No brands fetched or list is empty.");
+            return;
+        }
+
         BrandSpinner selectedBrand = null;
 
-        // Optional: Rearrange the list to put the selected brand at the top
-        if (selectedBrandID != null) {
-            for (int i = 0; i < brandList.size(); i++) {
-                BrandSpinner brand = brandList.get(i);
-                if (String.valueOf(brand.getId()).equals(selectedBrandID)) {
-                    selectedBrand = brandList.remove(i); // Remove the matching brand from its original position
-                    break;
-                }
-            }
-
-            // Add the selected brand at the top if it was found
-            if (selectedBrand != null) {
-                brandList.add(0, selectedBrand);  // Add it to the top of the list
+        // Find the selected brand based on the selectedBrandName
+        for (int i = 0; i < brandList.size(); i++) {
+            BrandSpinner brand = brandList.get(i);
+            if (brand.getBrand().equalsIgnoreCase(selectedBrandName)) {
+                selectedBrand = brandList.remove(i);
+                break;
             }
         }
 
-        // Create and set the adapter for the spinner
-        BrandSpinnerAdapter adapter = new BrandSpinnerAdapter(context, brandList);
-        spinner.setAdapter(adapter);
+        // Add the selected brand at the top if it was found
+        if (selectedBrand != null) {
+            brandList.add(0, selectedBrand);
 
-        // Optionally, set the spinner's selection to the first item (which is now the selected brand if applicable)
-        spinner.setSelection(0);  // The selected brand is now at index 0
+            // Save selected brand to SharedPreferences
+            SharedPreferences sharedPreferences = context.getSharedPreferences("BrandPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("selectedBrandID", String.valueOf(selectedBrand.getId()));
+            editor.putString("selectedBrandName", selectedBrand.getBrand());
+            editor.apply();
+        }
+
+        Log.d(TAG, "Setting adapter with brands:");
+        for (BrandSpinner brand : brandList) {
+            Log.d(TAG, "Brand: " + brand.getBrand());
+        }
+
+        // Set the adapter for AutoCompleteTextView
+        BrandAutoCompleteAdapter adapter = new BrandAutoCompleteAdapter(context, brandList);
+        autoCompleteTextView.setAdapter(adapter);
+        autoCompleteTextView.setText(selectedBrand != null ? selectedBrand.getBrand() : "");
+
+        // Show a toast with the selected brand's details
+        if (selectedBrand != null) {
+            String toastMessage = "Selected Brand: " + selectedBrand.getBrand() +
+                    "\nID: " + selectedBrand.getId() +
+                    "\nDone: " + selectedBrand.getDone();
+           // Toast.makeText(context, toastMessage, Toast.LENGTH_LONG).show();
+        } else {
+           // Toast.makeText(context, "No brand selected or found.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

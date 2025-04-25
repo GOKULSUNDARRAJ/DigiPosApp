@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="102dp"
+        android:layout_height="70dp"
         android:background="@drawable/topbarbg"
         app:layout_collapseMode="pin"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,18 +20,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="28dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
-                android:padding="8dp"
-                android:foreground="?attr/selectableItemBackground"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="8dp"
                 android:src="@drawable/leftarrow11"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +41,10 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:text="SALE REPORT"
                 android:textColor="@color/white"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +57,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -65,8 +66,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
             android:layout_marginTop="10dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
@@ -85,8 +86,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
@@ -150,9 +151,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="16dp"
-                        android:layout_marginLeft="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -160,9 +161,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:text="OUTLET"
-                            android:textStyle="bold"
                             android:textColor="@color/black1"
-                            android:textSize="13dp" />
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:layout_width="match_parent"
@@ -177,8 +178,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -200,49 +201,24 @@
                             android:dropDownVerticalOffset="60dp" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/regular"
-                            android:text="BRAND"
-                            android:textColor="@color/black1"
-                            android:textSize="13dp"
-                            android:textStyle="bold" />
-
-
-                        <com.app.digiposfinalapp.CustomSpinner
-                            android:id="@+id/spinner_brand"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="2dp"
-                            android:background="@drawable/bg_spinner_fruit"
-                            android:dropDownVerticalOffset="60dp" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:text="SUPPLIER"
-                            android:textStyle="bold"
                             android:textColor="@color/black1"
-                            android:textSize="13dp" />
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
 
 
                         <com.app.digiposfinalapp.CustomSpinner
@@ -258,8 +234,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -285,8 +261,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -312,8 +288,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="BRAND"
+                            android:textColor="@color/black1"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+
+                        <com.app.digiposfinalapp.CustomSpinner
+                            android:id="@+id/spinner_brand"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/bg_spinner_fruit"
+                            android:dropDownVerticalOffset="60dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -339,8 +342,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -366,7 +369,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_marginTop="20dp"
-                        android:background="@color/gray1"/>
+                        android:background="@color/gray1" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -388,11 +391,12 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="horizontal"
                             android:layout_marginTop="2dp"
+                            android:orientation="horizontal"
                             android:weightSum="2">
 
                             <EditText
+                                android:id="@+id/barcodeedt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
@@ -402,11 +406,11 @@
                                 android:textColor="@color/black" />
 
                             <LinearLayout
-                                android:layout_width="110dp"
                                 android:id="@+id/button3"
+                                android:layout_width="110dp"
+                                android:layout_height="52dp"
                                 android:layout_marginLeft="10dp"
-                                android:background="@drawable/blueroundsmallbg"
-                                android:layout_height="52dp">
+                                android:background="@drawable/blueroundsmallbg">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
@@ -451,20 +455,19 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="2"
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
                         <LinearLayout
                             android:id="@+id/button35"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginRight="5dp"
                             android:layout_marginLeft="16dp"
-                            android:background="@drawable/blueroundsmallbg"
-                            >
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/blueroundsmallbg">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -475,7 +478,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/add_black"
+                                    android:src="@drawable/baseline_settings_24"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/textView65"
                                     app:layout_constraintTop_toTopOf="parent"
@@ -507,11 +510,10 @@
                             android:id="@+id/button31"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="16dp"
-                            android:background="@drawable/redroundsmallbg"
-                            >
+                            android:layout_weight="1"
+                            android:background="@drawable/redroundsmallbg">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -522,7 +524,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/add_black"
+                                    android:src="@drawable/baseline_file_download_24"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/textView61"
                                     app:layout_constraintTop_toTopOf="parent"
@@ -554,8 +556,10 @@
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvSaleReport"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
 
                 </LinearLayout>
             </LinearLayout>

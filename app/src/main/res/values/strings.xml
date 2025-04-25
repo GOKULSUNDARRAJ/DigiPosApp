@@ -1,11 +1,111 @@
 <resources>
-    <string name="app_name">DigiposFinalApp</string>
+    <string name="app_name">Digpos App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="spinner_items">
+        <item>AnyOne</item>
         <item>18+</item>
-        <item>Any One</item>
     </string-array>
+
+
+    <string-array name="DEMO_APPS">
+        <item>Connectivity</item>
+        <item>Discovery</item>
+        <item>Image Print</item>
+        <item>List Formats</item>
+        <item>Mag Card</item>
+        <item>Printer Status</item>
+        <item>Smart Card</item>
+        <item>Signature Capture</item>
+        <item>Send File</item>
+        <item>Stored Format</item>
+        <item>Status Channel</item>
+        <item>Connection Builder</item>
+        <item>Receipt</item>
+        <item>Multichannel</item>
+    </string-array>
+    <string-array name="DISCODEMO_DISCO_METHODS">
+        <item>Bluetooth</item>
+        <item>BLE</item>
+        <item>Local Broadcast</item>
+        <item>Directed Broadcast</item>
+        <item>Multicast</item>
+        <item>Subnet Search</item>
+        <item>Find printers near me</item>
+    </string-array>
+
+    <color name="Red">#FF0000</color>
+
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="ip_dns">IP/DNS</string>
+    <string name="bluetooth_r">Bluetooth (R)</string>
+    <string name="ble">Bluetooth Low Energy (BLE)</string>
+    <string name="ip_address">Ip Address:</string>
+    <string name="port">Port:</string>
+    <string name="_9100">9100</string>
+    <string name="mac_address">MAC Address:</string>
+    <string name="test">Test</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="check_to_store_on_printer">Check to store on printer</string>
+    <string name="path_to_store_on_printer">Path to store on printer</string>
+    <string name="status_port">Status Port:</string>
+    <string name="_9200">9200</string>
+    <string name="find_available_channels">Find Available Channels</string>
+
+
+    <string-array name="railway_time_array">
+        <item>00:00</item>
+        <item>00:30</item>
+        <item>01:00</item>
+        <item>01:30</item>
+        <item>02:00</item>
+        <item>02:30</item>
+        <item>03:00</item>
+        <item>03:30</item>
+        <item>04:00</item>
+        <item>04:30</item>
+        <item>05:00</item>
+        <item>05:30</item>
+        <item>06:00</item>
+        <item>06:30</item>
+        <item>07:00</item>
+        <item>07:30</item>
+        <item>08:00</item>
+        <item>08:30</item>
+        <item>09:00</item>
+        <item>09:30</item>
+        <item>10:00</item>
+        <item>10:30</item>
+        <item>11:00</item>
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+        <item>14:30</item>
+        <item>15:00</item>
+        <item>15:30</item>
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+        <item>18:00</item>
+        <item>18:30</item>
+        <item>19:00</item>
+        <item>19:30</item>
+        <item>20:00</item>
+        <item>20:30</item>
+        <item>21:00</item>
+        <item>21:30</item>
+        <item>22:00</item>
+        <item>22:30</item>
+        <item>23:00</item>
+        <item>23:30</item>
+    </string-array>
+
 
 </resources>

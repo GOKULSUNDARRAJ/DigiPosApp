@@ -60,6 +60,7 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
         });
 
 
+
     }
 
     @Override

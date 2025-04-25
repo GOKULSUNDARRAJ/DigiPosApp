@@ -18,6 +18,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//Currently working android studio project Orignal project final
+
+//2026 Digipos
+
 public class SplachScreenActivity extends AppCompatActivity {
     String ipAddress, portNumber;
 
@@ -43,7 +47,6 @@ public class SplachScreenActivity extends AppCompatActivity {
         savedPassword = sharedPreferences.getString(Constants.KEY_PASSWORD, null);
 
 
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -53,12 +56,16 @@ public class SplachScreenActivity extends AppCompatActivity {
                 portNumber = sharedPreferences2.getString(Constants.KEY_PORT, "");
 
                 try {
-                    new SplachScreenActivity.ConnectToDatabaseTask().execute(ipAddress,portNumber);
+//                    new SplachScreenActivity.ConnectToDatabaseTask().execute(ipAddress,portNumber);
+                    Intent intent = new Intent(SplachScreenActivity.this, SeparateActivity.class);
+                    startActivity(intent);
+                    finish();
                 }catch (Exception e){
 
                 }
             }
         }, 1000);
+
 
 
     }
@@ -194,6 +201,7 @@ public class SplachScreenActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(Constants.KEY_USERNAME, inputUsername);
                 editor.putString(Constants.KEY_PASSWORD, inputPassword); // Save plain text password (consider hashing)
+                editor.putString(Constants.KEY_USERTYPE, userType);// Save plain text password (consider hashing)
                 editor.apply(); // Save changes
 
                 // If the username exists, navigate to HomeFragment

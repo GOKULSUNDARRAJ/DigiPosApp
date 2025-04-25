@@ -2,11 +2,20 @@ package com.app.digiposfinalapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.icu.text.SimpleDateFormat;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,19 +32,37 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.Locale;
 
 public class AddOrderFragment2 extends Fragment {
 
-    private String description, barcode, subDepartment, supplier, department, vat, ageLimit, Itemcode, Brand, UnitPerCase, CostPerCase, Price, sellingprice, Margin, plu, outerBarcode, price, addbarcode, endDate, startDate, dd_Price, ddpoint, manageStock, weight, capacitys, currentStock1, qty, minStock, reorderleve, discount, supplierNameorder, orderID;
+    private String description, barcode, SupplierName, subDepartment, department, vat, ageLimit, Itemcode, Brand, UnitPerCase, CostPerCase, Price, sellingprice, Margin, plu, outerBarcode, price, addbarcode, endDate, startDate, dd_Price, ddpoint, manageStock, weight, capacitys, currentStock1, qty, minStock, reorderleve, discount, supplierNameorder, orderID;
 
     Button savebtn;
     EditText qtyedt1;
     TextView qtyonhandedt1;
     String ipAddress, portNumber, databaseName, username, password;
 
+    private static final String TAG = "AddOrderFragment2";
+    private String savedSupplier; // To store the supplier selected from OrdersupplierFragment
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_order2, container, false);
+
+        ImageView home = view.findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HomeFragment bottomBarFragment = new HomeFragment();
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, bottomBarFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
         // Log fragment creation
         Log.d("AddOrderFragment2", "onCreateView called");
@@ -49,29 +77,45 @@ public class AddOrderFragment2 extends Fragment {
 
         Log.d("AddOrderFragment2", "IP: " + ipAddress + ", Port: " + portNumber);
 
+        // Retrieve the saved supplier from SharedPreferences
+        SharedPreferences appPrefs = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+        savedSupplier = appPrefs.getString("selected_supplier", null);
+        Log.d("AddOrderFragment2", "Saved supplier: " + savedSupplier);
+
         qtyedt1 = view.findViewById(R.id.qtyedt);
         qtyonhandedt1 = view.findViewById(R.id.qtyonhandedt);
-
         savebtn = view.findViewById(R.id.savebtn);
 
-        savebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (qtyedt1.getText().toString().isEmpty()) {
-                    Log.d("AddOrderFragment2", "Qty entered is empty");
-                    Toast.makeText(v.getContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Get the values to update in the database
-                    String qtyEntered = qtyedt1.getText().toString();
-
-                    // Attempt to update the order in the database
-                    updateOrderInDatabase(qtyEntered, orderID);
-                }
+        savebtn.setOnClickListener(v -> {
+            String qtyEntered = qtyedt1.getText().toString();
+            if (qtyEntered.isEmpty() || !qtyEntered.matches("\\d+")) {
+                Toast.makeText(getContext(), "Please enter valid quantity", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Check for supplier mismatch before proceeding
+            checkSupplierMismatchAndProceed(qtyEntered);
         });
 
+        // Ensure barcode is fetched after arguments are set
+        if (getArguments() != null) {
+            barcode = getArguments().getString("barcode");
+            fetchQuantityByBarcode(barcode);
+        }
 
-        fetchQuantityByBarcode(barcode);
+        // Back navigation
+        ImageView back = view.findViewById(R.id.imageView);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BarCodeScanOrderCreateSerachFragment productManagementFragment = new BarCodeScanOrderCreateSerachFragment();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
         return view;
     }
@@ -80,14 +124,10 @@ public class AddOrderFragment2 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Log received arguments
-        Log.d("AddOrderFragment2", "onCreate called, Arguments received: " + getArguments().toString());
-
         if (getArguments() != null) {
             description = getArguments().getString("description");
             barcode = getArguments().getString("barcode");
             subDepartment = getArguments().getString("subDepartment");
-            supplier = getArguments().getString("supplier");
             department = getArguments().getString("department");
             vat = getArguments().getString("vat");
             ageLimit = getArguments().getString("ageLimit");
@@ -117,99 +157,69 @@ public class AddOrderFragment2 extends Fragment {
             supplierNameorder = getArguments().getString("SupplierName");
             orderID = getArguments().getString("orderID");
 
-            Log.d("AddOrderFragment2", "OrderID: " + orderID); // Log order ID
+            Log.d("AddOrderFragment2", "OrderID: " + orderID);
+            Log.d("AddOrderFragment2", "Item supplier: " + supplierNameorder);
+
+            // DEBUG: Check if we have both suppliers
+            SharedPreferences appPrefs = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+            savedSupplier = appPrefs.getString("selected_supplier", null);
+            Log.d("AddOrderFragment2", "DEBUG - Saved supplier: " + savedSupplier);
+            Log.d("AddOrderFragment2", "DEBUG - Item supplier: " + supplierNameorder);
+            Log.d("AddOrderFragment2", "DEBUG - Are they different? " +
+                    (savedSupplier != null && !savedSupplier.equals(supplierNameorder)));
         }
     }
 
-    private void updateOrderInDatabase(String qtyEntered, String orderID) {
-        String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
+    private void checkSupplierMismatchAndProceed(String quantity) {
+        // DEBUG: Log the current state
+        Log.d("AddOrderFragment2", "checkSupplierMismatchAndProceed called");
+        Log.d("AddOrderFragment2", "savedSupplier: " + savedSupplier);
+        Log.d("AddOrderFragment2", "supplierNameorder: " + supplierNameorder);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Connection connection = null;
-                PreparedStatement preparedStatement = null;
-                try {
-                    // Log the connection string for debugging
-                    Log.d("AddOrderFragment2", "Database connection URL: " + connectionUrl);
+        // If no saved supplier, use the item's supplier
+        if (savedSupplier == null || savedSupplier.isEmpty()) {
+            Log.d("AddOrderFragment2", "No saved supplier, using item supplier");
+            SupplierName = supplierNameorder;
+            insertOrder(barcode, SupplierName, quantity, "1");
+            return;
+        }
 
-                    // Open connection
-                    connection = DriverManager.getConnection(connectionUrl, username, password);
+        // If suppliers match, proceed normally
+        if (savedSupplier.equals(supplierNameorder)) {
+            Log.d("AddOrderFragment2", "Suppliers match, proceeding normally");
+            SupplierName = savedSupplier;
+            insertOrder(barcode, SupplierName, quantity, "1");
+            return;
+        }
 
-
-                    double Cost = Long.parseLong(CostPerCase) * Double.parseDouble(qtyEntered);
-                    double Unit = Long.parseLong(UnitPerCase) * Double.parseDouble(qtyEntered);
-
-                    // Define the SQL update query
-
-                    String updateQuery = "UPDATE tbl_Order SET Quantity = ?, [Total_Cost (Inc VAT)] = ?,PLU =?,Barcode=?,Description=?,Supplier=?,CostPerCase=?,UnitPerCase=?,done=?,Cost=?,Units=? WHERE OrderID = ?";
-
-                    // Prepare the statement
-                    preparedStatement = connection.prepareStatement(updateQuery);
-                    preparedStatement.setString(1, qtyEntered);  // Use the actual quantity entered
-                    preparedStatement.setDouble(2, 0);   // Use calculated total cost
-                    preparedStatement.setString(3, orderID);     // Use the actual orderID
-                    preparedStatement.setString(3, plu);  // Set the PLU
-                    preparedStatement.setString(4, barcode);  // Set the barcode
-                    preparedStatement.setString(5, description);  // Set the description
-                    preparedStatement.setString(6, supplierNameorder);  // Set the supplier
-                    preparedStatement.setDouble(7, Double.parseDouble(UnitPerCase));  // Set CostPerCase
-                    preparedStatement.setDouble(8, Double.parseDouble(CostPerCase));  // Set CostPerCase
-                    preparedStatement.setInt(9, 0);
-                    preparedStatement.setDouble(10, Unit);  // Set Cost
-                    preparedStatement.setString(11, String.valueOf(Cost));  // Set Units
-                    preparedStatement.setString(12, orderID);  // Set OrderID
-
-
-                    // Log the parameters before executing
-                    Log.d("AddOrderFragment2", "Executing update with Quantity: " + qtyEntered + ", OrderID: " + orderID);
-
-                    // Execute the update
-                    int rowsAffected = preparedStatement.executeUpdate();
-                    if (rowsAffected > 0) {
-                        // Successfully updated
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getContext(), "Order updated successfully!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } else {
-                        // No rows affected (order not found or update failed)
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getContext(), "Failed to update order. Order not found.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-
-                } catch (SQLException | NumberFormatException e) {
-                    e.printStackTrace();
-                    // Log the error and handle the exception
-                    Log.e("AddOrderFragment2", "Database error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(), "Database error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } finally {
-                    try {
-                        if (preparedStatement != null) {
-                            preparedStatement.close();
-                        }
-                        if (connection != null) {
-                            connection.close();
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+        // Show dialog if there's a mismatch
+        Log.d("AddOrderFragment2", "Suppliers don't match, showing dialog");
+        showSupplierMismatchDialog(quantity);
     }
 
+    private void showSupplierMismatchDialog(String quantity) {
+        Log.d("AddOrderFragment2", "Showing supplier mismatch dialog");
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Supplier Mismatch")
+                .setMessage("You selected '" + savedSupplier + "' but this item belongs to '" +
+                        supplierNameorder + "'. Do you want to proceed with '" + savedSupplier + "'?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Use the saved supplier
+                    Log.d("AddOrderFragment2", "User chose to use saved supplier: " + savedSupplier);
+                    SupplierName = savedSupplier;
+                    insertOrder(barcode, SupplierName, quantity, "1");
+                    dialog.dismiss();
+                })
+                .setCancelable(false)
+                .setOnDismissListener(dialog -> {
+                    Log.d("AddOrderFragment2", "Dialog dismissed");
+                })
+                .show();
+    }
+
+
+    // Fetch quantity based on barcode
     private void fetchQuantityByBarcode(String barcode) {
         String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
 
@@ -219,24 +229,18 @@ public class AddOrderFragment2 extends Fragment {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 try {
-                    // Log the connection string for debugging
                     Log.d("AddOrderFragment2", "Database connection URL: " + connectionUrl);
 
-                    // Open connection
                     connection = DriverManager.getConnection(connectionUrl, username, password);
 
-                    // Define the SQL query
                     String query = "SELECT Quantity FROM tbl_SoldItems WHERE Barcode = ?";
                     preparedStatement = connection.prepareStatement(query);
                     preparedStatement.setString(1, barcode);
 
-                    // Execute the query
                     ResultSet resultSet = preparedStatement.executeQuery();
                     if (resultSet.next()) {
-                        // Retrieve the quantity from the result
                         int quantity = resultSet.getInt("Quantity");
 
-                        // Update the UI on the main thread
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -245,7 +249,6 @@ public class AddOrderFragment2 extends Fragment {
                             }
                         });
                     } else {
-                        // No record found for the given barcode
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -280,5 +283,115 @@ public class AddOrderFragment2 extends Fragment {
         }).start();
     }
 
+    public void insertOrder(String barcode, String supplier, String quantity, String done) {
+        new InsertOrderTask().execute(barcode, supplier, quantity, done);
+    }
 
+    private class InsertOrderTask extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            String barcode = params[0];
+            String supplier = params[1];
+            String quantity = params[2];
+            String done = params[3];
+
+            // Generate current date and time as yyyyMMddHHmmss string
+            Date now = new Date();
+            String formattedDateTime = new SimpleDateFormat("yyyyMMdd HH:mm:ss", Locale.getDefault()).format(now);
+
+
+            String url = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
+
+            try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                // Check if record exists (regardless of done status)
+                if (recordExists(connection, barcode, supplier)) {
+                    Log.d(TAG, "Record exists, updating quantity and DateTime");
+                    return updateExistingRecord(connection, barcode, supplier, quantity, formattedDateTime);
+                } else {
+                    Log.d(TAG, "Record doesn't exist, inserting new record with DateTime");
+                    return insertNewRecord(connection, barcode, supplier, quantity, done, formattedDateTime);
+                }
+            } catch (SQLException e) {
+                Log.e(TAG, "Database error: " + e.getMessage());
+                return false;
+            }
+        }
+
+        private boolean recordExists(Connection connection, String barcode, String supplier) throws SQLException {
+            String query = "SELECT 1 FROM HHDOrderList WHERE Barcode = ? AND Supplier = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, barcode);
+                stmt.setString(2, supplier);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    boolean exists = rs.next();
+                    Log.d(TAG, "Record exists check: " + exists);
+                    return exists;
+                }
+            }
+        }
+
+        private boolean insertNewRecord(Connection connection, String barcode, String supplier, String quantity, String done, String formattedDateTime) throws SQLException {
+            String query = "INSERT INTO HHDOrderList (Barcode, Supplier, Quantity, done, DateTime) " +
+                    "VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, barcode);
+                stmt.setString(2, supplier);
+                stmt.setString(3, quantity);
+                stmt.setString(4, done);
+                stmt.setString(5, formattedDateTime); // store date + time
+                boolean success = stmt.executeUpdate() > 0;
+                Log.d(TAG, "Insert successful: " + success + " with DateTime: " + formattedDateTime);
+                return success;
+            }
+        }
+
+        private boolean updateExistingRecord(Connection connection, String barcode, String supplier, String quantity, String formattedDateTime) throws SQLException {
+            String query = "UPDATE HHDOrderList " +
+                    "SET Quantity = Quantity + ?, done = 0, DateTime = ? " +
+                    "WHERE Barcode = ? AND Supplier = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setInt(1, Integer.parseInt(quantity));
+                stmt.setString(2, formattedDateTime); // store date + time
+                stmt.setString(3, barcode);
+                stmt.setString(4, supplier);
+                int rowsUpdated = stmt.executeUpdate();
+                Log.d(TAG, "Rows updated: " + rowsUpdated + " with DateTime: " + formattedDateTime);
+                return rowsUpdated > 0;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                BarCodeScanOrderCreateSerachFragment productManagementFragment = new BarCodeScanOrderCreateSerachFragment();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                Toast.makeText(getContext(), "Order saved successfully!", Toast.LENGTH_SHORT).show();
+                qtyedt1.setText("");
+            } else {
+                Toast.makeText(getContext(), "Failed to save order", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
+        }
+    }
 }

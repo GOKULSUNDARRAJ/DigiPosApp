@@ -60,8 +60,6 @@ public class FetchSupplierData extends AsyncTask<Void, Void, List<SupplierSpinne
                 supplier.setSupplier(resultSet.getString("SupplierName"));
                 supplier.setAddress(resultSet.getString("Address1"));
                 supplier.setContact(resultSet.getString("ContactName"));
-
-
                 supplierList.add(supplier);
                 Log.d(TAG, "Supplier added: " + supplier.getSupplier());
             }

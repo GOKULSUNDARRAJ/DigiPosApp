@@ -45,4 +45,9 @@ public class SubDepartmentspinner {
     public void setNum(String num) { // Setter for Num
         this.num = num;
     }
+
+    @Override
+    public String toString() {
+        return subDepartment; // Return the department name
+    }
 }

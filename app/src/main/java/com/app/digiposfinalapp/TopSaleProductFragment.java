@@ -1,8 +1,12 @@
 package com.app.digiposfinalapp;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -125,6 +129,22 @@ public class TopSaleProductFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
+        }
     }
 
 }

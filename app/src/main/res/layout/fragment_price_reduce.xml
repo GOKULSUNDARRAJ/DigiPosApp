@@ -7,20 +7,18 @@
     android:orientation="vertical"
     tools:context=".PriceReduceFragment">
 
-
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".PriceReduceFragment">
-
+        >
 
         <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="102dp"
+            android:layout_height="70dp"
             android:background="@drawable/topbarbg"
             app:layout_collapseMode="pin"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +28,23 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp">
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/home"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="goback"
+                    android:padding="8dp"
+                    android:src="@drawable/home"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/back"
@@ -79,6 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
+                    android:visibility="gone"
                     android:layout_marginRight="16dp"
                     android:orientation="vertical">
 
@@ -95,6 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
+
                         android:weightSum="1">
 
                         <EditText
@@ -109,15 +125,7 @@
                             android:padding="13dp"
                             android:textColor="@color/black" />
 
-                        <Button
-                            android:id="@+id/camera"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="7dp"
-                            android:layout_marginRight="7dp"
-                            android:background="@drawable/btnbgbluecamera"
-                            android:textColor="@color/white" />
+
                     </LinearLayout>
 
 
@@ -126,6 +134,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
@@ -149,6 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:visibility="gone"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
                     android:orientation="vertical">
@@ -187,7 +197,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
-                            android:text="PRICE SIZE"
+                            android:text="pack size"
+                            android:textAllCaps="true"
                             android:textColor="@color/black1"
                             android:textSize="13dp"
                             android:textStyle="bold" />
@@ -196,6 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:padding="13dp"
+                            android:inputType="number"
                             android:layout_marginTop="2dp"
                             android:background="@drawable/blackline" />
                     </LinearLayout>
@@ -216,14 +228,12 @@
                             android:textSize="13dp"
                             android:textStyle="bold" />
 
-
-                        <EditText
-                            android:id="@+id/vatedt"
+                        <Spinner
+                            android:id="@+id/vat_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="2dp"
-                            android:padding="13dp"
-                            android:background="@drawable/blackline" />
+                            android:background="@drawable/spinnerbg" />
                     </LinearLayout>
 
 
@@ -256,11 +266,13 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/costedt"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:padding="13dp"
                             android:layout_marginTop="2dp"
-                            android:background="@drawable/blackline" />
+                            android:inputType="number"
+                            android:background="@drawable/blackline"
+                            android:padding="13dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -287,6 +299,7 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="2dp"
                             android:padding="13dp"
+                            android:inputType="number"
                             android:background="@drawable/blackline"
                             android:maxLength="10" />
                     </LinearLayout>
@@ -325,8 +338,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="2dp"
-                            android:padding="13dp"
-                            android:background="@drawable/blackline" />
+                            android:inputType="number"
+                            android:background="@drawable/blackline"
+                            android:padding="13dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -351,6 +365,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="2dp"
+                            android:inputType="number"
                             android:padding="13dp"
                             android:background="@drawable/blackline" />
                     </LinearLayout>
@@ -416,9 +431,11 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/reducedpriceedt"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="2dp"
+                            android:inputType="number"
                             android:padding="13dp"
                             android:background="@drawable/blackline" />
                     </LinearLayout>
@@ -452,67 +469,73 @@
 
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F5F5F5"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:layout_marginTop="40dp"
+                    android:weightSum="4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbgblue"
+                        android:text="MENU"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbggray" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbgpurple"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/printbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbgwhiteblue"
+                        android:text="PRINT"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
+                <include layout="@layout/print_layout" />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F5F5F5"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:weightSum="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_weight="1"
-            android:background="@drawable/btnbgblue"
-            android:text="MENU"
-            android:textColor="@color/white" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_weight="1"
-            android:background="@drawable/btnbggray" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_weight="1"
-            android:background="@drawable/btnbgpurple"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/printbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_weight="1"
-            android:background="@drawable/btnbgwhiteblue"
-            android:text="PRINT"
-            android:textColor="@color/white" />
-
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

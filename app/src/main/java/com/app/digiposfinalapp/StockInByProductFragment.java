@@ -1,7 +1,11 @@
 package com.app.digiposfinalapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,5 +20,21 @@ public class StockInByProductFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_stock_in_by_product, container, false);
 
         return view;
+    }
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
+        }
     }
 }

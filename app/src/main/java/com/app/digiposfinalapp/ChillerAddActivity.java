@@ -27,7 +27,6 @@ public class ChillerAddActivity extends AppCompatActivity {
     String ipAddress, portNumber, databaseName, username, password;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,6 @@ public class ChillerAddActivity extends AppCompatActivity {
         databaseName = Constants.DATABASE_NAME;
         username = Constants.USERNAME;
         password = Constants.PASSWORD;
-
 
         // Initialize views
         addButton = findViewById(R.id.update);
@@ -72,7 +70,6 @@ public class ChillerAddActivity extends AppCompatActivity {
             }
         });
     }
-
     // Method to validate input data
     private boolean isValid(String chillerName, String temperature, String date, String time, String changeId, String day) {
         return !chillerName.isEmpty() && !temperature.isEmpty() && !date.isEmpty() && !time.isEmpty() && !changeId.isEmpty() && !day.isEmpty();

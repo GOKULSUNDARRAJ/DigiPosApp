@@ -10,7 +10,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
         android:layout_height="match_parent"
         >
         <ImageView
@@ -39,6 +38,7 @@
             android:fontFamily="@font/semibold"
             android:paddingLeft="10dp"
             android:text="Username"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="13dp"
             android:textStyle="bold"

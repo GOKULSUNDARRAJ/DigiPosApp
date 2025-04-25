@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,11 +22,11 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
 
     private static final String TAG = "FetchDepartmentDataEdit";
     private Context context;
-    private Spinner spinner;
+    private AutoCompleteTextView spinner;
     private String departmentID;
     private String ipAddress, portNumber, databaseName, username, password;
 
-    public FetchDepartmentDataEdit(Context context, Spinner spinner, String departmentID) {
+    public FetchDepartmentDataEdit(Context context, AutoCompleteTextView spinner, String departmentID) {
         this.context = context;
         this.spinner = spinner;
         this.departmentID = departmentID;
@@ -61,7 +63,7 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
                 // Handle age value
                 String ageString = resultSet.getString("Age");
                 try {
-                    if (ageString.matches("\\d+")) { // Check if it's numeric
+                    if (ageString != null && ageString.matches("\\d+")) { // Check if it's numeric
                         int age = Integer.parseInt(ageString);
                         departmentSpinner.setAge(age);
                     } else {
@@ -73,6 +75,9 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
                     departmentSpinner.setAge(0);
                 }
 
+                departmentSpinner.setAgestring(resultSet.getString("Age"));
+                departmentSpinner.setVatstring(resultSet.getString("VAT"));
+
                 departmentSpinner.setDepartment(resultSet.getString("Department"));
                 departmentSpinner.setNum(resultSet.getString("Num"));
                 departmentSpinner.setNoshop(resultSet.getString("Noshop"));
@@ -80,13 +85,13 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
                 departmentSpinner.setDone(resultSet.getBoolean("done"));
                 departmentSpinner.setImage(resultSet.getString("image"));
 
-                // Handle VAT value
+                // Handle VAT value with null check
                 String vatString = resultSet.getString("VAT");
                 try {
-                    if (vatString.endsWith("%")) { // Strip '%' if it's there
+                    if (vatString != null && vatString.endsWith("%")) { // Null check added
                         vatString = vatString.substring(0, vatString.length() - 1);
                     }
-                    double vat = Double.parseDouble(vatString);
+                    double vat = (vatString != null && !vatString.isEmpty()) ? Double.parseDouble(vatString) : 0.0;
                     departmentSpinner.setVat(vat);
                 } catch (NumberFormatException e) {
                     Log.e(TAG, "Error parsing VAT value: " + vatString + ". Defaulting to 0.0.");
@@ -117,29 +122,36 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
         return departmentList;
     }
 
-
     @Override
     protected void onPostExecute(List<Departmentspinner> departmentList) {
         super.onPostExecute(departmentList);
 
         if (departmentList == null || departmentList.isEmpty()) {
             Log.e(TAG, "No departments fetched or list is empty.");
-            return; // Early exit if no data
+            return;
         }
 
         Departmentspinner selectedDepartment = null;
 
+        // Find the selected department based on the departmentID
         for (int i = 0; i < departmentList.size(); i++) {
             Departmentspinner department = departmentList.get(i);
             if (String.valueOf(department.getId()).equals(departmentID)) {
-                selectedDepartment = departmentList.remove(i); // Remove the matching department from its original position
+                selectedDepartment = departmentList.remove(i);
                 break;
             }
         }
 
         // Add the selected department at the top if it was found
         if (selectedDepartment != null) {
-            departmentList.add(0, selectedDepartment);  // Add it to the top of the list
+            departmentList.add(0, selectedDepartment);
+
+            // Save selected department to SharedPreferences
+            SharedPreferences sharedPreferences = context.getSharedPreferences("DepartmentPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("selectedDepartmentID", String.valueOf(selectedDepartment.getId()));
+            editor.putString("selectedDepartmentName", selectedDepartment.getDepartment());
+            editor.apply();
         }
 
         Log.d(TAG, "Setting adapter with departments:");
@@ -147,8 +159,21 @@ public class FetchDepartmentDataEdit extends AsyncTask<Void, Void, List<Departme
             Log.d(TAG, "Department: " + dept.getDepartment());
         }
 
-        DepartmentSpinnerAdapter adapter = new DepartmentSpinnerAdapter(context, departmentList);
-        spinner.setAdapter(adapter);
-        spinner.setSelection(0);  // The selected department is now at index 0
+        // Set the adapter for AutoCompleteTextView
+        DepartmentAutoCompleteAdapter adapter = new DepartmentAutoCompleteAdapter(context, departmentList);
+        AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) spinner;
+        autoCompleteTextView.setAdapter(adapter);
+        autoCompleteTextView.setText(selectedDepartment != null ? selectedDepartment.getDepartment() : "");
+
+        // Show a toast with the selected department's details
+        if (selectedDepartment != null) {
+            String toastMessage = "Selected Department: " + selectedDepartment.getDepartment() +
+                    "\nID: " + selectedDepartment.getId() +
+                    "\nVAT: " + selectedDepartment.getVat() + "%";
+         //   Toast.makeText(context, toastMessage, Toast.LENGTH_LONG).show();
+        } else {
+           // Toast.makeText(context, "No department selected or found.", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }

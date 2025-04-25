@@ -1,5 +1,6 @@
 package com.app.digiposfinalapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,9 +39,12 @@ public class BrandAddActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_brand_add);
 
+        //5256 2207 0685 4787
+        // 825
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         ipAddress = sharedPreferences.getString(Constants.KEY_IP, "");
         portNumber = sharedPreferences.getString(Constants.KEY_PORT, "");
+
         databaseName = Constants.DATABASE_NAME;
         username = Constants.USERNAME;
         password = Constants.PASSWORD;

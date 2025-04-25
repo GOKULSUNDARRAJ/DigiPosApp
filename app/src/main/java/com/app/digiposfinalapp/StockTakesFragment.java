@@ -3,20 +3,29 @@ package com.app.digiposfinalapp;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,12 +50,29 @@ public class StockTakesFragment extends Fragment {
     Button findbarcodeedt;
     private boolean isBarcodeDetected = false;
     Bundle bundle;
+    private String barcodeValue;
 
     String laststocktakeid;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stock_takes, container, false);
+
+        ImageView home = view.findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HomeFragment bottomBarFragment = new HomeFragment();
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager(); // Use requireActivity()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, bottomBarFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+
+            }
+        });
+
 
         // Corrected line to get SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
@@ -55,8 +81,6 @@ public class StockTakesFragment extends Fragment {
         databaseName1 = Constants.DATABASE_NAME;
         dbUsername1 = Constants.USERNAME;  // Use actual database username
         dbPassword1 = Constants.PASSWORD;  // Use actual database password
-
-
 
         cameraImg=view.findViewById(R.id.Camera);
         cameraImg.setOnClickListener(new View.OnClickListener() {
@@ -71,38 +95,79 @@ public class StockTakesFragment extends Fragment {
             }
         });
 
+        ImageView backimage=view.findViewById(R.id.imageView);
+        backimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StockSubFragment productManagementFragment = new StockSubFragment();
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+            }
+        });
+
         barcodeedt=view.findViewById(R.id.barcodeedt);
         barcodeedt.setText(barcode);
+        barcodeedt.requestFocus();
 
         findbarcodeedt = view.findViewById(R.id.findbarcodeedt);
         findbarcodeedt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatabaseTask().execute(); // Call DatabaseTask with barcode value
-
+                barcodeValue=barcodeedt.getText().toString();
             }
+        });
+
+        BroadcastReceiver scanReceiver;
+
+        scanReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if ("nlscan.action.SCANNER_RESULT".equals(intent.getAction())) {
+                    String scanResult = intent.getStringExtra("SCAN_BARCODE1"); // Get scanned text
+                    if (scanResult != null) {
+                        barcodeedt.setText(scanResult); // Set scanned QR code text in EditText
+                    }
+                }
+            }
+        };
+
+        // Register the receiver using requireContext()
+        IntentFilter filter = new IntentFilter("nlscan.action.SCANNER_RESULT");
+        ContextCompat.registerReceiver(requireContext(), scanReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
+
+        barcodeedt.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                barcodeValue=barcodeedt.getText().toString();
+                new DatabaseTask().execute(); // Call DatabaseTask with barcode value
+                v.clearFocus(); // Hide keyboard
+                return true;
+            }
+            return false;
         });
 
         return view;
     }
-
 
     private class DatabaseTask extends AsyncTask<Void, Void, Void> {
         private String plu, description, barcode, subDepartment, supplier, buyPrice, quantity, department,id,
                 saleWithVAT, discount, costPerCase, price, vat, margin, ageLimit,itemcode,Brand,UnitPerCase,currentstock,minStock,reorderleve,
                 CostPerCase,Price,sellingprice,Margin,outerbarcode,costprice,addbarcode,startDate,enddate,dd_price,ddpoints,manageStock,weight,capatitys;
 
-        @SuppressLint("WrongThread")
         @Override
         protected Void doInBackground(Void... voids) {
-            String searchQuery = barcodeedt.getText().toString(); // Get the search query from the barcode
+            // Get the search query from the barcode
             String query = ""; // Initialize query
             String filterValue = ""; // Initialize filter value
 
-            if (!searchQuery.isEmpty()) {
+            if (!barcodeValue.isEmpty()) {
                 // If the search query is not empty, search by the query
                 query = "SELECT * FROM tbl_Products WHERE Barcode = ?";
-                filterValue = searchQuery;
+                filterValue = barcodeValue;
             } else {
                 return null; // Exit early if both search query and barcode are empty
             }
@@ -152,10 +217,7 @@ public class StockTakesFragment extends Fragment {
                         minStock=resultSet.getString("MinStock");
                         reorderleve=resultSet.getString("ReorderLevel");
 
-
-
-
-                        bundle = new Bundle();
+                        Bundle bundle = new Bundle();
                         bundle.putString("plu", plu);
                         bundle.putString("description", description);
                         bundle.putString("barcode", barcode);
@@ -193,23 +255,23 @@ public class StockTakesFragment extends Fragment {
                         bundle.putString("MinStock", minStock);
                         bundle.putString("Reorderleve", reorderleve);
                         bundle.putString("Discount", discount);
-                        bundle.putString("StockTake", laststocktakeid);
 
+                        // Create the ProductManagmentEditFragment and set arguments
+                        CountProductFragment productManagementFragment = new CountProductFragment();
+                        productManagementFragment.setArguments(bundle); // Set the bundle as arguments
+                        FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                        fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                        fragmentTransaction.commit();
 
-
-
-                        new StockTakesFragment.GetLastPLUTask().execute();
 
 
                     } else {
                         requireActivity().runOnUiThread(() -> {
                             Toast.makeText(getContext(), "No product found", Toast.LENGTH_SHORT).show();
-                            ProductManagmentAddFragment productManagementFragment = new ProductManagmentAddFragment();
-                            FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
-                            fragmentTransaction.addToBackStack(null); // Optional: add to back stack
-                            fragmentTransaction.commit();
+
+                            new GetLastPLUTask().execute();
 
                         });
 
@@ -226,8 +288,6 @@ public class StockTakesFragment extends Fragment {
             return null;
         }
 
-
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -237,71 +297,87 @@ public class StockTakesFragment extends Fragment {
                 requireActivity().runOnUiThread(() -> {
                     // Update the TextView with product details
 
-                    Toast.makeText(getContext(), "Product details updated", Toast.LENGTH_SHORT).show();
+
                 });
                 isBarcodeDetected = false; // Reset detection for the next barcode scan
             }
         }
-
     }
 
     private class GetLastPLUTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
-            laststocktakeid = null;
+            String maxPLU = null;
 
             try {
                 String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress1 + ":" + portNumber1 + "/" + databaseName1;
                 try (Connection connection = DriverManager.getConnection(connectionUrl, dbUsername1, dbPassword1)) {
-                    // SQL query to get the last PLU value
-                    String sql = "SELECT TOP 1 StockTakeID FROM StockTake ORDER BY ID DESC"; // Assuming ID is auto-incremented
+                    // SQL query to get the maximum PLU value
+                    String sql = "SELECT MAX(CAST(PLU AS BIGINT)) AS MaxPLU FROM tbl_Products WHERE ISNUMERIC(PLU) = 1";
                     try (PreparedStatement statement = connection.prepareStatement(sql);
                          ResultSet resultSet = statement.executeQuery()) {
 
                         if (resultSet.next()) {
-                            laststocktakeid = resultSet.getString("StockTakeID");
+                            maxPLU = resultSet.getString("MaxPLU");
                         }
                     }
                 }
             } catch (SQLException e) {
                 Log.e(TAG, "SQL Exception: " + e.getMessage(), e);
             }
-            return laststocktakeid;
+            return maxPLU;
         }
 
         @Override
         protected void onPostExecute(String result) {
-            if (result != null) {
-                // Do something with the last PLU, like updating the UI
-                Toast.makeText(requireActivity(), "Stock Take Id" + result, Toast.LENGTH_LONG).show();
+            try {
+                // Create a new Bundle to pass the barcode value
+                Bundle bundle = new Bundle();
+                bundle.putString("barcode", barcodeValue);
+                bundle.putString("fromStockSubFragment", "fromStockSubFragment");
 
+                // Handle PLU value safely
+                int pluValue;
+                if (result != null && !result.trim().isEmpty()) {
+                    try {
+                        pluValue = Integer.parseInt(result.trim()) + 1;
+                    } catch (NumberFormatException e) {
+                        pluValue = 3001; // Default value if parsing fails
+                    }
+                } else {
+                    pluValue = 3001; // Default value if result is null or empty
+                }
+                bundle.putString("PLU", String.valueOf(pluValue));
 
-                // Create the ProductManagmentEditFragment and set arguments
-                CountProductFragment productManagementFragment = new CountProductFragment();
-                productManagementFragment.setArguments(bundle); // Set the bundle as arguments
-                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                // Create and show the fragment
+                ProductManagmentAddFragment productManagementFragment = new ProductManagmentAddFragment();
+                productManagementFragment.setArguments(bundle);
+
+                FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
-                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
-
-            } else {
-                Toast.makeText(requireActivity(), "Empty", Toast.LENGTH_LONG).show();
-                // Create the ProductManagementEditFragment and set arguments
-                CountProductFragment productManagementFragment = new CountProductFragment();
-                Bundle args = new Bundle();
-                args.putString("StockTake", "3000"); // Use a key to identify the data
-                args.putString("barcode", barcode); // Use a key to identify the data
-                productManagementFragment.setArguments(args);
-                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
-                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
-                fragmentTransaction.commit();
-
-
+            } catch (Exception e) {
+                Log.e(TAG, "Error in onPostExecute: ", e);
+                Toast.makeText(requireActivity(), "Error occurred", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
         }
     }
 

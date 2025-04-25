@@ -39,7 +39,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
         holder.brand.setText(brand.getBrandName());
         holder.done.setText(String.valueOf(brand.getDone()));
 
-        
+
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,13 +48,13 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
                 String brandName = brand.getBrandName();
                 String plu = String.valueOf(brand.getDone());
                 String id = String.valueOf(brand.getId());
-
                 // Open bottom sheet fragment for editing
                 MyBottomSheetFragmentbrand bottomSheetFragment = new MyBottomSheetFragmentbrand();
                 bottomSheetFragment.setDetails(view.getContext(), brandName, plu, id);
                 bottomSheetFragment.show(((BrandActivity) view.getContext()).getSupportFragmentManager(), bottomSheetFragment.getTag());
 
             }
+
         });
 
         holder.carproduct.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,10 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
             }
         });
 
+
+
     }
+
 
     @Override
     public int getItemCount() {

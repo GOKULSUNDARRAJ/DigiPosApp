@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="102dp"
+            android:layout_height="70dp"
             android:background="@drawable/topbarbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp">
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -73,10 +73,10 @@
                             android:layout_height="20dp"
                             android:layout_gravity="center"
                             android:src="@drawable/export"
-                            android:tint="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/textView6"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:id="@+id/textView6"
@@ -559,10 +559,10 @@
                         android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:src="@drawable/printlist"
-                        android:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/textView0"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
 
                     <TextView
                         android:id="@+id/textView0"
@@ -609,10 +609,10 @@
                         android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:src="@drawable/print"
-                        android:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/textView7"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
 
                     <TextView
                         android:id="@+id/textView7"

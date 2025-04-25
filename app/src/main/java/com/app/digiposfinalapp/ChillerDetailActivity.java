@@ -67,4 +67,3 @@ public class ChillerDetailActivity extends AppCompatActivity {
 
 
 
-

@@ -1,5 +1,6 @@
 package com.app.digiposfinalapp;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class MyBottomSheetFragmentpromotion extends BottomSheetDialogFragment {
         databaseName = Constants.DATABASE_NAME;
         username = Constants.USERNAME;
         password = Constants.PASSWORD;
+
 
         // Initialize UI components
         ID = view.findViewById(R.id.autocompleteTextView);
@@ -96,6 +98,7 @@ public class MyBottomSheetFragmentpromotion extends BottomSheetDialogFragment {
         return view;
     }
 
+
     private void populateFields() {
         ID.setText(id1);
         promoId1edt.setText(promoId1);
@@ -110,6 +113,7 @@ public class MyBottomSheetFragmentpromotion extends BottomSheetDialogFragment {
         itemCount1edt.setText(itemCount1);
         plu1edt.setText(plu1);
         done1edt.setText(done1);
+
     }
 
     private boolean validateInputs() {
@@ -185,6 +189,7 @@ public class MyBottomSheetFragmentpromotion extends BottomSheetDialogFragment {
                     preparedStatement.setString(11, (String) params[10]);
                     preparedStatement.setInt(12, (Integer) params[11]);
                     preparedStatement.setString(13, id1);
+
 
                     // Execute update
                     int rowsUpdated = preparedStatement.executeUpdate();

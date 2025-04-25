@@ -78,6 +78,8 @@ public class PromotionActivity extends AppCompatActivity implements CustomSpinne
 
         // Fetch data from the database and populate the RecyclerView
         fetchDataFromDatabase();
+
+
     }
 
     private void fetchDataFromDatabase() {
@@ -123,6 +125,8 @@ public class PromotionActivity extends AppCompatActivity implements CustomSpinne
                     // Set other data accordingly
                     promotionList.add(promotion);
                 }
+
+                
 
                 runOnUiThread(() -> {
                     adapter.notifyDataSetChanged(); // Notify adapter of data change

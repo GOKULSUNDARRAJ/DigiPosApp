@@ -10,6 +10,16 @@ public class Departmentspinner {
     private boolean done;
     private String image;
     private double vat;
+    private String agestring;
+    private String Vatstring;
+
+    public String getVatstring() {
+        return Vatstring;
+    }
+
+    public void setVatstring(String vatstring) {
+        Vatstring = vatstring;
+    }
 
     // Getters and Setters
     public int getId() {
@@ -82,5 +92,19 @@ public class Departmentspinner {
 
     public void setVat(double vat) {
         this.vat = vat;
+    }
+
+    // Override toString() to return the department name
+    @Override
+    public String toString() {
+        return department; // Return the department name
+    }
+
+    public String getAgestring() {
+        return agestring;
+    }
+
+    public void setAgestring(String agestring) {
+        this.agestring = agestring;
     }
 }

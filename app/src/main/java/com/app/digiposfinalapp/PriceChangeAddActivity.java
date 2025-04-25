@@ -131,6 +131,7 @@ public class PriceChangeAddActivity extends AppCompatActivity {
                 preparedStatement.setString(8, qty);
 
                 // Execute the insert statement
+
                 int rowsInserted = preparedStatement.executeUpdate();
 
                 // Return true if rows were inserted, false otherwise
@@ -169,4 +170,5 @@ public class PriceChangeAddActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 }

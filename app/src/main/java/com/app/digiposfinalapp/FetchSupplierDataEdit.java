@@ -6,7 +6,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Spinner;
+import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,16 +19,16 @@ import java.util.List;
 
 public class FetchSupplierDataEdit extends AsyncTask<Void, Void, List<SupplierSpinner>> {
 
-    private static final String TAG = "FetchSupplierDataTask"; // Tag for logging
+    private static final String TAG = "FetchSupplierDataEdit"; // Tag for logging
     private Context context;
-    private Spinner spinner;  // Spinner reference to populate
+    private AutoCompleteTextView autoCompleteTextView;  // AutoCompleteTextView reference to populate
     private String supplierName;  // To filter by supplier name
     private String ipAddress, portNumber, databaseName, username, password;
 
-    // Modified constructor to accept the supplier name string
-    public FetchSupplierDataEdit(Context context, Spinner spinner, String supplierName) {
+    // Modified constructor to accept the AutoCompleteTextView and supplier name
+    public FetchSupplierDataEdit(Context context, AutoCompleteTextView autoCompleteTextView, String supplierName) {
         this.context = context;
-        this.spinner = spinner;
+        this.autoCompleteTextView = autoCompleteTextView;
         this.supplierName = supplierName;  // Get the supplier name from arguments
     }
 
@@ -92,38 +93,63 @@ public class FetchSupplierDataEdit extends AsyncTask<Void, Void, List<SupplierSp
     protected void onPostExecute(List<SupplierSpinner> supplierList) {
         super.onPostExecute(supplierList);
 
-        // Log the number of suppliers fetched
-        Log.d(TAG, "Suppliers fetched: " + supplierList.size());
+        if (supplierList == null || supplierList.isEmpty()) {
+            Log.e(TAG, "No suppliers fetched or list is empty.");
+            return;
+        }
 
         SupplierSpinner selectedSupplier = null;
 
-        // Rearrange the list to put the supplier with the matching name at the top
+        // Find the selected supplier based on the supplierName
+//        for (int i = 0; i < supplierList.size(); i++) {
+//            SupplierSpinner supplier = supplierList.get(i);
+//            if (supplier.getSupplier().equalsIgnoreCase(supplierName)) {
+//                selectedSupplier = supplierList.remove(i);
+//                break;
+//            }
+//        }
+
+        // Find the selected supplier based on the supplierName
         for (int i = 0; i < supplierList.size(); i++) {
             SupplierSpinner supplier = supplierList.get(i);
-            if (supplier.getSupplier().equalsIgnoreCase(supplierName)) {
-                selectedSupplier = supplierList.remove(i); // Remove the matching supplier from its original position
+            if (supplierName != null && supplierName.equalsIgnoreCase(supplier.getSupplier())) {
+                selectedSupplier = supplierList.remove(i);
                 break;
             }
         }
 
+
+
         // Add the selected supplier at the top if it was found
         if (selectedSupplier != null) {
-            supplierList.add(0, selectedSupplier);  // Add it to the top of the list
+            supplierList.add(0, selectedSupplier);
+
+            // Save selected supplier to SharedPreferences
+            SharedPreferences sharedPreferences = context.getSharedPreferences("SupplierPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("selectedSupplierID", String.valueOf(selectedSupplier.getId()));
+            editor.putString("selectedSupplierName", selectedSupplier.getSupplier());
+            editor.apply();
         }
 
-        // Log the final supplier list for debugging
+        Log.d(TAG, "Setting adapter with suppliers:");
         for (SupplierSpinner supplier : supplierList) {
-            Log.d(TAG, "Supplier in list: " + supplier.getSupplier());
+            Log.d(TAG, "Supplier: " + supplier.getSupplier());
         }
 
-        // Create and set the adapter for the spinner
-        SupplierSpinnerAdapter adapter = new SupplierSpinnerAdapter(context, supplierList);
-        spinner.setAdapter(adapter);
+        // Set the adapter for AutoCompleteTextView
+        SupplierAutoCompleteAdapter adapter = new SupplierAutoCompleteAdapter(context, supplierList);
+        autoCompleteTextView.setAdapter(adapter);
+        autoCompleteTextView.setText(selectedSupplier != null ? selectedSupplier.getSupplier() : "");
 
-        // Set the spinner's selection to the first item (which is now the selected supplier)
-        if (!supplierList.isEmpty()) {
-            spinner.setSelection(0);  // The selected supplier is now at index 0
+        // Show a toast with the selected supplier's details
+        if (selectedSupplier != null) {
+            String toastMessage = "Selected Supplier: " + selectedSupplier.getSupplier() +
+                    "\nID: " + selectedSupplier.getId() +
+                    "\nContact: " + selectedSupplier.getContact();
+         //   Toast.makeText(context, toastMessage, Toast.LENGTH_LONG).show();
+        } else {
+           // Toast.makeText(context, "No supplier selected or found.", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

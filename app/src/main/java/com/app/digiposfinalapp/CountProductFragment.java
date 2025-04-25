@@ -5,9 +5,11 @@ import static android.content.ContentValues.TAG;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,11 +19,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -32,28 +39,31 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 public class CountProductFragment extends Fragment {
 
     private static final String TAG = "CountProductFragment";
     private String ipAddress, portNumber, databaseName, username, password;
-    private String barcode1;
+    private String barcode1,description;
     private Button buttonInsert;
     private EditText qtyedt;
     private TextView currentqtytxt;
     private String laststocktakeid;
 
     TextView message;
-    int addqty;
+    int currectqty;
 
     int instervalue;
 
-
+    int newqty;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             barcode1 = getArguments().getString("barcode");
+            description= getArguments().getString("description");
             Log.d(TAG, "Received Barcode: " + barcode1);
         }
     }
@@ -69,6 +79,21 @@ public class CountProductFragment extends Fragment {
         databaseName = Constants.DATABASE_NAME;
         username = Constants.USERNAME;
         password = Constants.PASSWORD;
+
+
+        ImageView home = view.findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HomeFragment bottomBarFragment = new HomeFragment();
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager(); // Use requireActivity()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, bottomBarFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+
+            }
+        });
 
 
 
@@ -93,86 +118,74 @@ public class CountProductFragment extends Fragment {
 
         message = view.findViewById(R.id.message);
 
+
+
+        TextView descriptiontxt=view.findViewById(R.id.description);
+        descriptiontxt.setText(description);
+
+
+       ImageView backimage=view.findViewById(R.id.imageView);
+        backimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StockTakesFragment productManagementFragment = new StockTakesFragment();
+                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
+                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.commit();
+            }
+        });
+
+
+        TextView message=view.findViewById(R.id.message123);
+
         qtyedt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int tart, int count, int after) {
-                // No need to calculate before the text is changed
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // This method is called before the text is changed
+                // You can use this to perform any action before the change occurs
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                calculateAndUpdateMessage();
+                // This method is called as the text is being changed
+                // You can use this to perform any action while the text is changing
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Optionally, if you want to calculate again after text has changed
-                calculateAndUpdateMessage();
-            }
-        });
+                int difference = 0;
 
+                if (editable.toString().isEmpty()) {
+                    return; // Exit if the EditText is empty
+                }
 
-        // Define your RadioButtons
-        RadioButton radioButton1 = view.findViewById(R.id.radioButton1);
-        RadioButton radioButton2 = view.findViewById(R.id.radioButton2);
-        radioButton2.setChecked(true);
-// Set up listeners to prevent both from being enabled simultaneously
-        radioButton1.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // If radioButton1 is checked, uncheck radioButton2
-                radioButton2.setChecked(false);
-            }
-        });
+                // Parse entered quantity
+                int enterquantity = Integer.parseInt(qtyedt.getText().toString());
 
-        radioButton2.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // If radioButton2 is checked, uncheck radioButton1
-                radioButton1.setChecked(false);
+                // ✅ If current stock is negative (e.g., -1), treat it as 0 for comparison
+                int effectiveCurrentQty = (currectqty < 0) ? 0 : currectqty;
+
+                if (enterquantity > effectiveCurrentQty) {
+                    difference = enterquantity - effectiveCurrentQty;
+                    message.setText("Stock quantity increased by: " + difference);
+                    message.setTextColor(getResources().getColor(R.color.green));
+                } else if (enterquantity < effectiveCurrentQty) {
+                    difference = effectiveCurrentQty - enterquantity;
+                    message.setText("Stock quantity decreased by: " + difference);
+                    message.setTextColor(getResources().getColor(R.color.red));
+                } else {
+                    message.setText("Stock quantity remains unchanged.");
+                    message.setTextColor(getResources().getColor(R.color.gray));
+                }
             }
+
         });
 
 
         return view;
     }
-
-
-    private class GetLastPLUTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... voids) {
-            laststocktakeid = null;
-
-            try {
-                String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
-                try (Connection connection = DriverManager.getConnection(connectionUrl, username, password)) {
-                    String sql = "SELECT TOP 1 StockTakeID FROM StockTake ORDER BY ID DESC";
-                    try (PreparedStatement statement = connection.prepareStatement(sql);
-                         ResultSet resultSet = statement.executeQuery()) {
-
-                        if (resultSet.next()) {
-                            laststocktakeid = resultSet.getString("StockTakeID");
-                        }
-                    }
-                }
-            } catch (SQLException e) {
-                Log.e(TAG, "SQL Exception: " + e.getMessage(), e);
-            }
-            return laststocktakeid;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                Toast.makeText(requireActivity(), "Count Stock Take Id " + result, Toast.LENGTH_LONG).show();
-            } else {
-                // Set default Stock Take ID if the table is empty
-                laststocktakeid = "3000"; // Set default value
-                Toast.makeText(requireActivity(), "No Stock Take ID found. Using default: " + laststocktakeid, Toast.LENGTH_LONG).show();
-            }
-            // Continue with the next task
-            new CheckBarcodeExistsTask().execute(barcode1);
-        }
-    }
-
 
     private class CheckBarcodeExistsTask extends AsyncTask<String, Void, Integer> {
 
@@ -180,7 +193,7 @@ public class CountProductFragment extends Fragment {
         protected Integer doInBackground(String... params) {
             String barcode = params[0];
             Connection connection = null;
-            int quantity = -1;  // Initialize with -1 to indicate no quantity found
+            int quantity = -999;  // Default for "not found"
 
             try {
                 String connectionString = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
@@ -192,7 +205,7 @@ public class CountProductFragment extends Fragment {
                 ResultSet resultSet = statement.executeQuery();
 
                 if (resultSet.next()) {
-                    quantity = resultSet.getInt("Quantity"); // Retrieve Quantity if the barcode exists
+                    quantity = resultSet.getInt("Quantity"); // ✅ keep DB value (can be -1)
                 }
 
                 resultSet.close();
@@ -214,61 +227,126 @@ public class CountProductFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Integer quantity) {
-            if (quantity >= 0) {
-                Toast.makeText(getContext(), "Barcode exists. Quantity: " + quantity, Toast.LENGTH_SHORT).show();
+            if (quantity != -999) {
                 insertBarcode(quantity);
-                currentqtytxt.setText("THE CURRENT STOCK IS" + "\t" + String.valueOf(quantity));
 
-                addqty = quantity;
+                currentqtytxt.setText("THE CURRENT STOCK IS " + quantity);
 
+                // ✅ Set color depending on value
+                if (quantity < 0) {
+                    currentqtytxt.setTextColor(getResources().getColor(R.color.red));
+                } else {
+                    currentqtytxt.setTextColor(getResources().getColor(R.color.green1)); // or any normal color
+                }
+
+                currectqty = quantity;
             } else {
                 Toast.makeText(getContext(), "Barcode does not exist in the database.", Toast.LENGTH_SHORT).show();
                 buttonInsert.setEnabled(true);
-
             }
         }
 
     }
 
 
+
+    private class GetLastPLUTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... voids) {
+            laststocktakeid = null;
+
+            try {
+                String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
+                try (Connection connection = DriverManager.getConnection(connectionUrl, username, password)) {
+                    String sql = "SELECT TOP 1 StockTakeID FROM StockCount ORDER BY ID DESC";
+                    try (PreparedStatement statement = connection.prepareStatement(sql);
+                         ResultSet resultSet = statement.executeQuery()) {
+
+                        if (resultSet.next()) {
+                            laststocktakeid = resultSet.getString("StockTakeID");
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                Log.e(TAG, "SQL Exception: " + e.getMessage(), e);
+            }
+            return laststocktakeid;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+             //   Toast.makeText(requireActivity(), "Count Stock Take Id " + result, Toast.LENGTH_LONG).show();
+            } else {
+                // Set default Stock Take ID if the table is empty
+                laststocktakeid = "3000"; // Set default value
+                Toast.makeText(requireActivity(), "No Stock Take ID found. Using default: " + laststocktakeid, Toast.LENGTH_LONG).show();
+            }
+            // Continue with the next task
+            new CheckBarcodeExistsTask().execute(barcode1);
+        }
+    }
+
+
     private void insertBarcode(Integer q) {
         if (laststocktakeid == null) {
-            Toast.makeText(getActivity(), "Stock Take ID is missing" + laststocktakeid, Toast.LENGTH_SHORT).show();
+          //
+            //  Toast.makeText(getActivity(), "Stock Take ID is missing" + laststocktakeid, Toast.LENGTH_SHORT).show();
             return; // Exit the method early
         }
 
         int addstockid = Integer.parseInt(laststocktakeid);
         String stockTakeIDStr = String.valueOf(addstockid);
         String barcode = barcode1;
-        int addedquantity = instervalue;
+        int enterquantity = Integer.parseInt(qtyedt.getText().toString());
 
         int stockTakeID;
         try {
             stockTakeID = Integer.parseInt(stockTakeIDStr) + 1;
         } catch (NumberFormatException e) {
             Log.e(TAG, "Invalid StockTakeID: " + stockTakeIDStr, e);
-            Toast.makeText(getActivity(), "Invalid Stock Take ID", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), "Invalid Stock Take ID", Toast.LENGTH_SHORT).show();
             return; // Exit if the parsing fails
         }
 
+        int differnece=0;
+        if (enterquantity > currectqty){
+           differnece=enterquantity-currectqty;
 
-        new InsertBarcodesTask(stockTakeID, barcode, addedquantity).execute();
-        new UpdateQuantityTask(barcode, addedquantity).execute();
+            new InsertBarcodesTask(stockTakeID, barcode, enterquantity,currectqty,differnece).execute();
+            new UpdateQuantityTask(barcode, enterquantity).execute();
+
+        }else if (enterquantity<currectqty){
+            differnece=currectqty-enterquantity;
+            new InsertBarcodesTask(stockTakeID, barcode, differnece,currectqty,enterquantity).execute();
+            new UpdateQuantityTask(barcode, enterquantity).execute();
+        }
+
+
+
+
 
     }
+
+
 
 
     private class InsertBarcodesTask extends AsyncTask<Void, Void, Void> {
         private int stockTakeID;
         private String barcode;
         private int qty;
+        private int currentStock; // New field for CurrentStock
+        private int stockAdjustment; // StockAdjustment
 
-        public InsertBarcodesTask(int stockTakeID, String barcode, int qty) {
+        public InsertBarcodesTask(int stockTakeID, String barcode, int qty, int currentStock, int stockAdjustment) {
             this.stockTakeID = stockTakeID;
             this.barcode = barcode;
             this.qty = qty;
+            this.currentStock = currentStock;
+            this.stockAdjustment = stockAdjustment; // Initialize StockAdjustment
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         protected Void doInBackground(Void... params) {
             Connection connection = null;
@@ -277,12 +355,28 @@ public class CountProductFragment extends Fragment {
                 String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress + ":" + portNumber + "/" + databaseName;
                 connection = DriverManager.getConnection(connectionUrl, username, password);
 
-                String insertQuery = "INSERT INTO [STAR_RETAIL].[dbo].[StockTake] ([StockTakeID], [Barcode], [Qty], [DateTime]) VALUES (?, ?, ?, ?)";
+                // Adjusted the query to include [StockAdjustment] column
+                String insertQuery = "INSERT INTO [STAR_RETAIL].[dbo].[StockCount] " +
+                        "([StockTakeID], [Barcode], [new_quantity], [CurrentStock], [date], [time], [StockAdjustment]) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)";
                 preparedStatement = connection.prepareStatement(insertQuery);
                 preparedStatement.setInt(1, stockTakeID); // StockTakeID
                 preparedStatement.setString(2, barcode); // Barcode
                 preparedStatement.setInt(3, qty); // Qty
-                preparedStatement.setTimestamp(4, new java.sql.Timestamp(System.currentTimeMillis())); // DateTime
+                preparedStatement.setInt(4, currentStock); // CurrentStock
+
+                // Setting date and time columns
+                String currentDateStr = java.time.LocalDate.now().toString(); // Convert LocalDate to String
+                java.sql.Date currentDate = java.sql.Date.valueOf(currentDateStr); // Convert String to java.sql.Date
+
+                // Remove milliseconds from the time
+                LocalTime currentTimeWithoutMillis = java.time.LocalTime.now().truncatedTo(ChronoUnit.SECONDS); // Remove milliseconds
+                String currentTimeStr = currentTimeWithoutMillis.toString(); // Convert LocalTime to String (HH:mm:ss)
+                java.sql.Time currentTime = java.sql.Time.valueOf(currentTimeStr); // Convert String to java.sql.Time
+
+                preparedStatement.setDate(5, currentDate); // date
+                preparedStatement.setTime(6, currentTime); // time
+                preparedStatement.setInt(7, stockAdjustment); // StockAdjustment (insert the StockAdjustment value)
 
                 preparedStatement.executeUpdate();
                 Log.d(TAG, "Barcode inserted successfully");
@@ -306,6 +400,7 @@ public class CountProductFragment extends Fragment {
     }
 
 
+
     private class UpdateQuantityTask extends AsyncTask<Void, Void, Void> {
         private String barcode;
         private int newQuantity;
@@ -327,7 +422,7 @@ public class CountProductFragment extends Fragment {
                     statement.executeUpdate();
                     Log.d(TAG, "Quantity updated successfully");
 
-                    BarCodeScanStockTakeFragment productManagementFragment = new BarCodeScanStockTakeFragment();
+                    StockTakesFragment productManagementFragment = new StockTakesFragment();
                     FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
@@ -341,38 +436,18 @@ public class CountProductFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
 
-    private void calculateAndUpdateMessage() {
-        String qtyText = qtyedt.getText().toString().trim();
-        int currentQuantity = addqty;
-        if (!qtyText.isEmpty()) {
-            try {
-                int enteredQuantity = Integer.parseInt(qtyText);
-                int result;
-                String updateMessage;
-
-                // Check if enteredQuantity is less than currentQuantity
-                if (enteredQuantity < currentQuantity) {
-                    result = currentQuantity - enteredQuantity; // Calculate the difference
-                    updateMessage = "The stock Quantity will be reduced by " + result;
-                    message.setTextColor(getResources().getColor(R.color.redColor));
-                    instervalue = result;
-
-                } else {
-                    result = enteredQuantity - currentQuantity; // Calculate the increase
-                    updateMessage = "The stock Quantity will be Increased by " + result;
-                    message.setTextColor(getResources().getColor(R.color.green));
-                    instervalue = Integer.parseInt(qtyText);
-
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
                 }
-
-                message.setText(updateMessage);
-            } catch (NumberFormatException e) {
-                // Handle potential NumberFormatException if qtyedt has invalid input
-                message.setText("Invalid input");
-            }
-        } else {
-            message.setText("No quantity entered");
+            });
         }
     }
 

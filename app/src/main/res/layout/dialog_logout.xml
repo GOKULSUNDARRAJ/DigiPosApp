@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="250dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="230dp"
+    android:layout_height="230dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/claer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="265dp"
-            android:background="@drawable/baseline_cancel"
-            android:elevation="2dp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rounded_background"
             android:orientation="vertical">
 
@@ -33,23 +28,24 @@
                 android:gravity="center"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/font123"
-                android:text="No Product Available with this Barcode Value"
+                android:text="Do you want to logout?"
                 android:textColor="@color/black2"
                 android:textSize="13dp" />
 
 
-            <Button
-                android:id="@+id/editTextDialogInput"
+            <TextView
+                android:id="@+id/save"
                 android:layout_width="156dp"
-                android:layout_height="50dp"
+                android:layout_height="43dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:backgroundTint="@color/lightred"
+                android:background="@color/lightred"
                 android:textColor="@color/white"
                 android:fontFamily="@font/font123"
-                android:text="Add New Product"
+                android:text="logout"
+                android:textAllCaps="false"
                 android:paddingLeft="5dp" />
 
             <TextView
@@ -67,6 +63,16 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/claer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/baseline_cancel"
+            android:elevation="2dp"
+            android:tint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

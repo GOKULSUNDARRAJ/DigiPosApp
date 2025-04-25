@@ -1,7 +1,11 @@
 package com.app.digiposfinalapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -35,7 +39,6 @@ public class PromotionDetailsFragment extends Fragment {
         conditiontxt=view.findViewById(R.id.conditiontxt);
         rewardtxt=view.findViewById(R.id.rewardtxt);
 
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +50,6 @@ public class PromotionDetailsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-
 
         rewardlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +67,31 @@ public class PromotionDetailsFragment extends Fragment {
             public void onClick(View v) {
                 rewardlayout.setBackgroundResource(R.drawable.whiteroundsmallbg);
                 conditionlayout.setBackgroundResource(R.drawable.blueroundsmallbg);
-
                 rewardtxt.setTextColor(ContextCompat.getColor(getContext(), R.color.dgblue));
                 conditiontxt.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
             }
         });
 
         return view;
+
     }
 
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
+        }
+    }
+
 }
+

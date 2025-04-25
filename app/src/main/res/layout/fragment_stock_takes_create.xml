@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="102dp"
+        android:layout_height="70dp"
         android:background="@drawable/topbarbg"
         app:layout_collapseMode="pin"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp">
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -32,6 +32,7 @@
                 android:layout_marginBottom="10dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="8dp"
+                android:onClick="goback"
                 android:src="@drawable/leftarrow11"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

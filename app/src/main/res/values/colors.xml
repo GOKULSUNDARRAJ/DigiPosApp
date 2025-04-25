@@ -8,7 +8,7 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-
+    <color name="yellow">#ffdc10</color>
     <color name="blue">#2A6CCA</color>
     <color name="green">#04a96d</color>
     <color name="orange">#FFA10D</color>
@@ -42,7 +42,8 @@
     <color name="black1">#010101</color>
     <color name="gray1">#c0bfc4</color>
     <color name="green1">#26ad5e</color>
-    <color name="blue1">#1d86fc</color>
+    <color name="blue1">#017eff</color>
+
     <color name="ligthgray1">#e7e8ea</color>
     <color name="ligthblue1">#5e2a94</color>
     <color name="orange1">#e67a00</color>
@@ -91,6 +92,8 @@
     <color name="color11">#a0d69a</color>
     <color name="color12">#ffbb94</color>
 
+    <color name="color122">#FF9D66</color>
+
     <color name="redlight">#f96767</color>
 
     <color name="goldcolor">#feb739</color>
@@ -104,6 +107,16 @@
     <color name="greencard">#52dfc3</color>
     <color name="yellowcard">#ffb955</color>
     <color name="rosecard">#ff5b79</color>
+
+    <color name="red2">#c83c49</color>
+
+    <color name="lightyellow">#ffffe6</color>
+    <color name="pinklight">#F8E1F6</color>
+    <color name="bluse4654">#4948a6</color>
+    <color name="tempcolor">#4e8149</color>
+
+
+
 
 
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ProductManagmentEditFragment">
 
     <LinearLayout
@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="102dp"
+            android:layout_height="70dp"
             android:background="@drawable/topbarbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,17 +24,17 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="28dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:padding="8dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:padding="8dp"
                     android:src="@drawable/leftarrow11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -44,17 +44,29 @@
                     android:id="@+id/title4545"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:text="EDIT PRODUCT"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
-
+                <ImageView
+                    android:id="@+id/home"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="goback"
+                    android:padding="8dp"
+                    android:src="@drawable/home"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
@@ -64,6 +76,7 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,30 +85,27 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:visibility="gone"
                 android:orientation="horizontal"
-                >
+                android:padding="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/semibold"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/semibold"
                     android:text="ADD NEW PRODUCT"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:layout_marginStart="10dp"
-                    />
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:orientation="vertical"
-                >
+                android:padding="10dp">
 
 
                 <LinearLayout
@@ -103,8 +113,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -128,48 +138,49 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"
                     android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
                         android:text="BRANCH"
-                        android:textStyle="bold"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
 
                     <com.app.digiposfinalapp.CustomSpinner
                         android:id="@+id/spinner_fruits"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:dropDownVerticalOffset="60dp"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/bg_spinner_fruit"/>
+                        android:background="@drawable/bg_spinner_fruit"
+                        android:dropDownVerticalOffset="60dp" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
-                        android:text="BAR CODE"
-                        android:textStyle="bold"
+                        android:text="BAR CODE *"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/barcodeedt"
@@ -184,19 +195,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
-                        android:text="DESCRIPTION"
-                        android:textStyle="bold"
+                        android:text="DESCRIPTION *"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/descriptionedt"
@@ -208,22 +219,215 @@
                         android:textColor="@color/black" />
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="Selling Price(Unit) *"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black1"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/sellingprice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/yellowfill"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:padding="13dp"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="case price"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black1"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/casepriceedt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/pinklight"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:padding="13dp"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
-                        android:text="ITEM CODE"
-                        android:textStyle="bold"
+                        android:text="DEPARTMENT *"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/spinner_department"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/spinnerbg"
+                        android:completionThreshold="1"
+                        android:hint="Search Department"
+                        android:padding="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="SUB DEPARTMENT"
+                        android:textColor="@color/black1"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/spinner_subdepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/spinnerbg"
+                        android:completionThreshold="1"
+                        android:hint="Search Sub Department"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="AGE LIMIT"
+                            android:textColor="@color/black1"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/age_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/spinnerbg" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="VAT%"
+                            android:textColor="@color/black1"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+
+                        <Spinner
+                            android:id="@+id/vat_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/spinnerbg" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="ITEM CODE"
+                        android:textColor="@color/black1"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/itemcodeedt"
@@ -238,21 +442,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
-                        android:text="PLU"
-                        android:textStyle="bold"
+                        android:text="PLU *"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/pludt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -266,81 +470,31 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
-                        android:text="DEPARTMENT"
-                        android:textStyle="bold"
-                        android:textColor="@color/black1"
-                        android:textSize="13dp" />
-
-                    <Spinner
-                        android:id="@+id/spinner_department"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/spinnerbg"
-                        android:layout_marginTop="2dp"
-                        android:layout_height="45dp"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/regular"
-                        android:text="SUB DEPARTMENT"
-                        android:textStyle="bold"
-                        android:textColor="@color/black1"
-                        android:textSize="13dp" />
-
-                    <Spinner
-                        android:id="@+id/spinner_subdepartment"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/spinnerbg"
-                        android:layout_marginTop="2dp"
-                        android:layout_height="45dp"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/regular"
+                        android:hint="Search Supplier"
                         android:text="SUPPLIER"
-                        android:textStyle="bold"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
-                    <Spinner
+                    <AutoCompleteTextView
                         android:id="@+id/spinner_spuulier"
                         android:layout_width="match_parent"
-                        android:background="@drawable/spinnerbg"
-                        android:layout_marginTop="2dp"
                         android:layout_height="45dp"
-                        />
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/spinnerbg"
+                        android:completionThreshold="1"
+                        android:hint="Search Supplier"
+                        android:padding="10dp" />
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -360,21 +514,23 @@
                         android:textSize="13dp"
                         android:textStyle="bold" />
 
-                    <Spinner
+                    <AutoCompleteTextView
                         android:id="@+id/spinner_brand"
                         android:layout_width="match_parent"
-                        android:background="@drawable/spinnerbg"
-                        android:layout_marginTop="2dp"
                         android:layout_height="45dp"
-                        />
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/spinnerbg"
+                        android:completionThreshold="1"
+                        android:hint="Search Brand"
+                        android:padding="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -382,9 +538,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
                         android:text="OUTER BARCODE"
-                        android:textStyle="bold"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/outerbarcodeedt"
@@ -395,90 +551,59 @@
                         android:padding="13dp"
                         android:textColor="@color/black" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="EXPIRE DATE"
+                        android:textColor="@color/black1"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/expiry_dateedt1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="2dp"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/regular"
-                            android:text="AGE LIMIT"
-                            android:textStyle="bold"
-                            android:textColor="@color/black1"
-                            android:textSize="13dp" />
-
-                        <Spinner
-                            android:id="@+id/age_spinner"
-                            android:layout_width="match_parent"
-                            android:background="@drawable/spinnerbg"
-                            android:layout_marginTop="2dp"
-                            android:layout_height="50dp"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/regular"
-                            android:text="VAT%"
-                            android:textStyle="bold"
-                            android:textColor="@color/black1"
-                            android:textSize="13dp" />
-
-
-                        <Spinner
-                            android:id="@+id/vat_spinner"
-                            android:layout_width="match_parent"
-                            android:background="@drawable/spinnerbg"
-                            android:layout_marginTop="2dp"
-                            android:layout_height="50dp"
-                            />
-                    </LinearLayout>
+                        android:background="@drawable/blackline"
+                        android:padding="13dp"
+                        android:textColor="@color/black" />
 
 
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2">
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginRight="5dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
 
                             <TextView
@@ -486,9 +611,9 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/regular"
                                 android:text="UNIT PER CASE"
-                                android:textStyle="bold"
                                 android:textColor="@color/black1"
-                                android:textSize="13dp" />
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
 
                             <EditText
                                 android:id="@+id/unitPerCaseedt"
@@ -496,16 +621,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:background="@drawable/blackline"
-                                android:padding="13dp"
                                 android:inputType="number"
+                                android:padding="13dp"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
 
                             <TextView
@@ -513,9 +638,9 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/regular"
                                 android:text="COST PER CASE"
-                                android:textStyle="bold"
                                 android:textColor="@color/black1"
-                                android:textSize="13dp" />
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
 
                             <EditText
                                 android:id="@+id/costpercaseedt"
@@ -524,39 +649,13 @@
                                 android:layout_marginTop="2dp"
                                 android:background="@drawable/blackline"
                                 android:inputType="number"
+                                android:maxLength="10"
                                 android:padding="13dp"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="5dp"
-                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/regular"
-                                android:text="COSTPRICE"
-                                android:textStyle="bold"
-                                android:textColor="@color/black1"
-                                android:textSize="13dp" />
-
-                            <TextView
-                                android:id="@+id/costpricetxt"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:maxLines="1"
-                                android:background="@drawable/grayfill"
-                                android:padding="16dp"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
                     </LinearLayout>
-
-
 
 
                 </LinearLayout>
@@ -564,19 +663,66 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/regular"
+                                android:text="unit cost price inc vat"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black1"
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/costpricetxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/grayfill"
+                                android:maxLines="1"
+                                android:padding="16dp"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
-                        android:text="ADDITIONAL BARCODR"
-                        android:textStyle="bold"
+                        android:text="ADDITIONAL BARCODE"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/additionalbarcode"
@@ -584,57 +730,27 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:background="@drawable/blackline"
+                        android:inputType="number"
                         android:padding="13dp"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/regular"
-                        android:text="Selling Price(Inr Vat)"
-                        android:textStyle="bold"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black1"
-                        android:textSize="13dp" />
-
-                    <EditText
-                        android:id="@+id/sellingprice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/bluefill"
-                        android:padding="13dp"
-                        android:textColor="@color/white" />
-                </LinearLayout>
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
-
-
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginRight="5dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -642,9 +758,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:text="MARGIN"
-                            android:textStyle="bold"
                             android:textColor="@color/black1"
-                            android:textSize="13dp" />
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/marginedt"
@@ -652,14 +768,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:background="@drawable/blackline"
+                            android:inputType="number"
                             android:padding="13dp"
                             android:textColor="@color/black" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -667,37 +785,118 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:text="MARK UP"
-                            android:textStyle="bold"
                             android:textColor="@color/black1"
-                            android:textSize="13dp" />
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/markupedt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:background="@drawable/grayfill"
-                            android:padding="16dp"
+                            android:inputType="number"
+                            android:padding="13dp"
                             android:textColor="@color/black" />
                     </LinearLayout>
 
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/regular"
+                                android:text="Current Stock (Unit)"
+                                android:textColor="@color/black1"
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/quantityedt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/blackline"
+                                android:inputType="number"
+                                android:padding="15dp"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/regular"
+                                android:text="Current Stock (case)"
+                                android:textColor="@color/black1"
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/caseunitedt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/blackline"
+                                android:inputType="number"
+                                android:padding="15dp"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
                         android:text="Actual Margin"
-                        android:textStyle="bold"
                         android:textColor="@color/black1"
-                        android:textSize="13dp" />
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -709,25 +908,95 @@
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="item sold as"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black1"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
 
+                    <RadioGroup
+                        android:id="@+id/radioGroupunit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
 
+                        <RadioButton
+                            android:id="@+id/radioButtonunit1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="UNIT" />
 
+                        <RadioButton
+                            android:id="@+id/radioButtonkg2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="KG" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="DEFAULT" />
+
+                    </RadioGroup>
+                </LinearLayout>
 
 
                 <Button
                     android:id="@+id/save1"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/greennew"
-                    android:text="SAVE"
-                    android:elevation="0dp"
-                    android:layout_marginRight="7dp"
                     android:layout_marginLeft="7dp"
-                    android:textColor="@color/white"
-                    />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@color/greennew"
+                    android:elevation="0dp"
+                    android:text="SAVE"
+                    android:layout_marginBottom="40dp"
+                    android:textColor="@color/white" />
 
+                <Button
+                    android:id="@+id/addtobarcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:background="@color/lightpurple"
+                    android:elevation="0dp"
+                    android:text="add to barcode"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/print"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@color/lightpurple"
+                    android:text="print"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/addvancebtn"
@@ -739,38 +1008,39 @@
                     android:background="@color/yellowcard"
                     android:text="addvance"
                     android:textAllCaps="true"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/addvancelayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="25dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="300dp"
                             android:layout_height="65dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/myddpoints"/>
+                            android:src="@drawable/myddpoints" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -778,17 +1048,17 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:text="DD PRICE"
-                            android:textStyle="bold"
                             android:textColor="@color/black1"
-                            android:textSize="13dp" />
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/ddpriceedt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:inputType="number"
                             android:background="@drawable/blackline"
+                            android:inputType="number"
                             android:padding="13dp"
                             android:textColor="@color/black" />
                     </LinearLayout>
@@ -796,9 +1066,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -811,8 +1081,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginRight="5dp"
+                                android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -820,9 +1090,9 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/regular"
                                     android:text="START DATE"
-                                    android:textStyle="bold"
                                     android:textColor="@color/black1"
-                                    android:textSize="13dp" />
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
 
                                 <EditText
                                     android:id="@+id/startdate"
@@ -837,8 +1107,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -846,9 +1116,9 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/regular"
                                     android:text="END DATE"
-                                    android:textStyle="bold"
                                     android:textColor="@color/black1"
-                                    android:textSize="13dp" />
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
 
                                 <EditText
                                     android:id="@+id/enddatedt"
@@ -869,9 +1139,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -879,9 +1149,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:text="DD PRICE"
-                            android:textStyle="bold"
                             android:textColor="@color/black1"
-                            android:textSize="13dp" />
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -899,26 +1169,25 @@
                                     android:id="@+id/enable1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ENABLE"
-                                    android:textSize="13dp"
                                     android:buttonTint="@color/blue1"
+                                    android:text="ENABLE"
                                     android:textColor="@color/black1"
-                                    android:textStyle="bold"/>
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
 
                                 <RadioButton
                                     android:id="@+id/disable1"
                                     android:layout_width="wrap_content"
-                                    android:layout_marginLeft="20dp"
                                     android:layout_height="wrap_content"
-                                    android:text="DISABLE"
+                                    android:layout_marginLeft="20dp"
                                     android:buttonTint="@color/blue1"
+                                    android:text="DISABLE"
                                     android:textColor="@color/black1"
                                     android:textSize="13dp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold" />
 
 
                             </RadioGroup>
-
 
 
                         </LinearLayout>
@@ -927,9 +1196,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -937,9 +1206,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:text="DD POINTS"
-                            android:textStyle="bold"
                             android:textColor="@color/black1"
-                            android:textSize="13dp" />
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -957,26 +1226,25 @@
                                     android:id="@+id/enable"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ENABLE"
-                                    android:textSize="13dp"
                                     android:buttonTint="@color/blue1"
+                                    android:text="ENABLE"
                                     android:textColor="@color/black1"
-                                    android:textStyle="bold"/>
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
 
                                 <RadioButton
                                     android:id="@+id/disable"
                                     android:layout_width="wrap_content"
-                                    android:layout_marginLeft="20dp"
                                     android:layout_height="wrap_content"
-                                    android:text="DISABLE"
+                                    android:layout_marginLeft="20dp"
                                     android:buttonTint="@color/blue1"
+                                    android:text="DISABLE"
                                     android:textColor="@color/black1"
                                     android:textSize="13dp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold" />
 
 
                             </RadioGroup>
-
 
 
                         </LinearLayout>
@@ -985,9 +1253,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:background="@drawable/blackline"
                         android:orientation="vertical">
 
@@ -995,9 +1263,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -1005,9 +1273,9 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/regular"
                                 android:text="ITEM SOLD AS"
-                                android:textStyle="bold"
                                 android:textColor="@color/black1"
-                                android:textSize="13dp" />
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1023,25 +1291,24 @@
                                     <RadioButton
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="UNIT"
                                         android:buttonTint="@color/blue1"
-                                        android:textSize="13dp"
+                                        android:text="UNIT"
                                         android:textColor="@color/black1"
-                                        android:textStyle="bold"/>
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <RadioButton
                                         android:layout_width="wrap_content"
-                                        android:layout_marginLeft="30dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:buttonTint="@color/blue1"
                                         android:text="KG"
                                         android:textColor="@color/black1"
-                                        android:buttonTint="@color/blue1"
                                         android:textSize="13dp"
-                                        android:textStyle="bold"/>
+                                        android:textStyle="bold" />
 
 
                                 </RadioGroup>
-
 
 
                             </LinearLayout>
@@ -1051,9 +1318,9 @@
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -1061,9 +1328,9 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/regular"
                                 android:text="MANAGE STOCK"
-                                android:textStyle="bold"
                                 android:textColor="@color/black1"
-                                android:textSize="13dp" />
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1081,26 +1348,25 @@
                                         android:id="@+id/yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="YES"
-                                        android:textSize="13dp"
                                         android:buttonTint="@color/blue1"
+                                        android:text="YES"
                                         android:textColor="@color/black1"
-                                        android:textStyle="bold"/>
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <RadioButton
                                         android:id="@+id/no"
                                         android:layout_width="wrap_content"
-                                        android:layout_marginLeft="38dp"
                                         android:layout_height="wrap_content"
-                                        android:text="NO"
+                                        android:layout_marginLeft="38dp"
                                         android:buttonTint="@color/blue1"
+                                        android:text="NO"
                                         android:textColor="@color/black1"
                                         android:textSize="13dp"
-                                        android:textStyle="bold"/>
+                                        android:textStyle="bold" />
 
 
                                 </RadioGroup>
-
 
 
                             </LinearLayout>
@@ -1109,9 +1375,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -1124,8 +1390,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -1133,9 +1399,9 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/regular"
                                         android:text="WEIGHT"
-                                        android:textStyle="bold"
                                         android:textColor="@color/black1"
-                                        android:textSize="13dp" />
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <EditText
                                         android:id="@+id/weightedt"
@@ -1143,6 +1409,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:background="@drawable/blackline"
+                                        android:inputType="number"
                                         android:padding="13dp"
                                         android:textColor="@color/black" />
                                 </LinearLayout>
@@ -1150,8 +1417,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -1159,9 +1426,9 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/regular"
                                         android:text="CAPACITY"
-                                        android:textStyle="bold"
                                         android:textColor="@color/black1"
-                                        android:textSize="13dp" />
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <EditText
                                         android:id="@+id/capacity"
@@ -1169,6 +1436,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:background="@drawable/blackline"
+                                        android:inputType="number"
                                         android:padding="13dp"
                                         android:textColor="@color/black" />
                                 </LinearLayout>
@@ -1180,9 +1448,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -1194,8 +1462,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -1203,9 +1471,9 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/regular"
                                         android:text="CURRENT STOCK"
-                                        android:textStyle="bold"
                                         android:textColor="@color/black1"
-                                        android:textSize="13dp" />
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <EditText
                                         android:id="@+id/currentstock"
@@ -1213,6 +1481,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:background="@drawable/blackline"
+                                        android:inputType="number"
                                         android:padding="13dp"
                                         android:textColor="@color/black" />
                                 </LinearLayout>
@@ -1220,8 +1489,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -1229,9 +1498,9 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/regular"
                                         android:text="QUANTITY"
-                                        android:textStyle="bold"
                                         android:textColor="@color/black1"
-                                        android:textSize="13dp" />
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <EditText
                                         android:id="@+id/quantity"
@@ -1239,6 +1508,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:background="@drawable/blackline"
+                                        android:inputType="number"
                                         android:padding="13dp"
                                         android:textColor="@color/black" />
                                 </LinearLayout>
@@ -1252,9 +1522,9 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -1267,8 +1537,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -1276,9 +1546,9 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/regular"
                                         android:text="REORDER LEVEL"
-                                        android:textStyle="bold"
                                         android:textColor="@color/black1"
-                                        android:textSize="13dp" />
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <EditText
                                         android:id="@+id/reorderlevel"
@@ -1286,6 +1556,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:background="@drawable/blackline"
+                                        android:inputType="number"
                                         android:padding="13dp"
                                         android:textColor="@color/black" />
                                 </LinearLayout>
@@ -1293,8 +1564,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -1302,9 +1573,9 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/regular"
                                         android:text="MIN STOCK"
-                                        android:textStyle="bold"
                                         android:textColor="@color/black1"
-                                        android:textSize="13dp" />
+                                        android:textSize="13dp"
+                                        android:textStyle="bold" />
 
                                     <EditText
                                         android:id="@+id/minstaockedt"
@@ -1312,6 +1583,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
                                         android:background="@drawable/blackline"
+                                        android:inputType="number"
                                         android:padding="13dp"
                                         android:textColor="@color/black" />
                                 </LinearLayout>
@@ -1323,10 +1595,10 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="20dp"
-                            android:layout_marginLeft="10dp"
                             android:orientation="horizontal">
 
                             <RadioGroup
@@ -1339,11 +1611,11 @@
                                     android:id="@+id/didcount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="NO DISCOUNT"
-                                    android:textSize="13dp"
                                     android:buttonTint="@color/blue1"
+                                    android:text="NO DISCOUNT"
                                     android:textColor="@color/black1"
-                                    android:textStyle="bold"/>
+                                    android:textSize="13dp"
+                                    android:textStyle="bold" />
 
                             </RadioGroup>
 
@@ -1355,21 +1627,20 @@
                         android:id="@+id/save"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:layout_marginLeft="7dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginRight="7dp"
                         android:background="@color/greennew"
                         android:text="SAVE"
-                        android:layout_marginRight="7dp"
-                        android:layout_marginLeft="7dp"
-                        android:textColor="@color/white"
-                        />
+                        android:textColor="@color/white" />
 
                     <Button
                         android:id="@+id/clearbtn"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="7dp"
                         android:background="@color/blue1"
                         android:text="CLEAR"
                         android:textColor="@color/white" />
@@ -1378,13 +1649,13 @@
                         android:id="@+id/close"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="@color/rednew"
-                        android:text="CLOSE"
+                        android:layout_marginLeft="7dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="7dp"
-                        android:layout_marginLeft="7dp"
-                        android:textColor="@color/white"
-                        />
+                        android:background="@color/rednew"
+                        android:text="CLOSE"
+                        android:textColor="@color/white" />
+
                 </LinearLayout>
 
 

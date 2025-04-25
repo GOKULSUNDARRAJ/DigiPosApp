@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -53,6 +54,7 @@ public class BarCodeScanActivity extends AppCompatActivity {
             startCameraPreview();
         }
     }
+
 
     private void startCameraPreview() {
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this)
@@ -113,6 +115,7 @@ public class BarCodeScanActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -126,4 +129,6 @@ public class BarCodeScanActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

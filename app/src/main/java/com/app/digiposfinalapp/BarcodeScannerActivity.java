@@ -1,6 +1,5 @@
 package com.app.digiposfinalapp;
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,7 +14,6 @@ import androidx.core.content.ContextCompat;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-
 public class BarcodeScannerActivity extends AppCompatActivity {
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 200;
@@ -27,31 +25,20 @@ public class BarcodeScannerActivity extends AppCompatActivity {
 
         // Show camera permission dialog
         requestCameraPermission();
-
-
-
     }
 
     private void requestCameraPermission() {
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-
             startBarcodeScanner();
-
         } else {
-
             ActivityCompat.requestPermissions(
                     this,
                     new String[]{Manifest.permission.CAMERA
                     },
                     CAMERA_PERMISSION_REQUEST_CODE
             );
-
         }
-
     }
-
-
 
     private void startBarcodeScanner() {
         IntentIntegrator integrator = new IntentIntegrator(this);
@@ -62,8 +49,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(
@@ -77,7 +62,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
             }
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -95,9 +79,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
             finish();
         }
 
-
-
     }
-
 
 }

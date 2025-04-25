@@ -32,14 +32,11 @@ public class MainActivity extends AppCompatActivity {
     DepartmentAdapter departmentAdapter;
     List<DepartmentModel> departmentList = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-
 
         recyclerView = findViewById(R.id.recyclerView); // Ensure this ID matches your layout file
 
@@ -61,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     public void gotoback(View view) {
         onBackPressed();
     }
-
 
     private class DatabaseTask extends AsyncTask<Void, Void, Void> {
         @Override
@@ -86,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         departmentList.add(departmentModel);
                     }
                 }
+
 
             } catch (SQLException e) {
                 Log.e(TAG, "SQL Exception: " + e.getMessage());

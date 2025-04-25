@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822847636443",
+    "project_id": "digiposcrash",
+    "storage_bucket": "digiposcrash.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822847636443:android:6fd1425950c95e2f771dfe",
+        "android_client_info": {
+          "package_name": "com.app.digiposfinalapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRipeEe_gmNRkEV45KCsjY4O3Gl7Z_Y2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

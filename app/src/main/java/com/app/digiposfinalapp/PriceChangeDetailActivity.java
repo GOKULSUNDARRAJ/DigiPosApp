@@ -15,9 +15,8 @@ public class PriceChangeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_price_change_detail);
+
         Intent intent = getIntent();
-
-
         // Get the extra data from the intent
         String departmentId = intent.getStringExtra("DEPARTMENTID");
         String plu = intent.getStringExtra("PLU");
@@ -50,8 +49,6 @@ public class PriceChangeDetailActivity extends AppCompatActivity {
         dateTextView.setText(date);
         capacityTextView.setText(capacity);
         qtyTextView.setText(String.valueOf(qty));
-
-
 
     }
 

@@ -51,10 +51,8 @@ public class BarcodeAdapter extends RecyclerView.Adapter<BarcodeAdapter.ViewHold
                 String capacity = data.getCapacity();
                 int qty = data.getQty();
                 int id = data.getDepartmentId(); // Assuming you have a method to get the ID of the item
-
                 // Show the clicked item's details in a Toast
                 String message = "PLU: " + plu + "\nBarcode: " + barcode + "\nDetail: " + detail + "\nShop: " + shop + "\nPrice: " + price + "\nDate: " + date + "\nCapacity: " + capacity + "\nQty: " + qty;
-
                 // Open bottom sheet fragment for editing
                 MyBottomSheetFragmentPRICECHANGE bottomSheetFragment = new MyBottomSheetFragmentPRICECHANGE();
                 bottomSheetFragment.setDetails(view.getContext(), plu, barcode, detail, shop, price, date, capacity, qty, id);
@@ -62,13 +60,11 @@ public class BarcodeAdapter extends RecyclerView.Adapter<BarcodeAdapter.ViewHold
             }
         });
 
-
         holder.carproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Create an intent to open the new activity
                 Intent intent = new Intent(view.getContext(), PriceChangeDetailActivity.class);
-
                 // Put extra data (details) into the intent
                 intent.putExtra("DEPARTMENTID", String.valueOf(data.getDepartmentId()));
                 intent.putExtra("PLU", String.valueOf(data.getPLU()));
@@ -79,18 +75,11 @@ public class BarcodeAdapter extends RecyclerView.Adapter<BarcodeAdapter.ViewHold
                 intent.putExtra("DATE", String.valueOf(data.getDtDate()));
                 intent.putExtra("CAPACITY", String.valueOf(data.getCapacity()));
                 intent.putExtra("QTY", String.valueOf(data.getQty()));
-
                 // Start the new activity
                 view.getContext().startActivity(intent);
             }
         });
 
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Click",Toast.LENGTH_LONG);
-            }
-        });
     }
 
     @Override

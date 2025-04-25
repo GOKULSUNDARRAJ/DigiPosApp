@@ -73,6 +73,7 @@ public class DepartmentData {
     }
 
     public interface OnDepartmentDataFetchListener {
+
         void onFetchSuccess(List<Department> departmentList);
 
         void onFetchFailed(Exception e);

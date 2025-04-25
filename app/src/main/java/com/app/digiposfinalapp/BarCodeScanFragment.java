@@ -18,8 +18,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -60,7 +62,7 @@ public class BarCodeScanFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment productManagementFragment = new HomeFragment();
+                BarCodeScanFragmentNewSearch productManagementFragment = new BarCodeScanFragmentNewSearch();
                 FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager() instead of getSupportFragmentManager()
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
@@ -68,6 +70,7 @@ public class BarCodeScanFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
 
         // Corrected line to get SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
@@ -90,6 +93,8 @@ public class BarCodeScanFragment extends Fragment {
             startCameraPreview();
         }
 
+
+
         return view;
 
     }
@@ -97,8 +102,9 @@ public class BarCodeScanFragment extends Fragment {
     private void startCameraPreview() {
 
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(requireContext())
-                .setBarcodeFormats(Barcode.ALL_FORMATS)
+                .setBarcodeFormats(Barcode.CODE_128 | Barcode.CODE_39 | Barcode.EAN_13 | Barcode.UPC_A)
                 .build();
+
 
         cameraSource = new CameraSource.Builder(requireContext(), barcodeDetector)
                 .setAutoFocusEnabled(true)
@@ -174,8 +180,9 @@ public class BarCodeScanFragment extends Fragment {
 
     private class DatabaseTask extends AsyncTask<Void, Void, Void> {
         private String plu, description, barcode, subDepartment, supplier, buyPrice, quantity, department,id,
-                saleWithVAT, discount, costPerCase, price, vat, margin, ageLimit,itemcode,Brand,UnitPerCase,currentstock,minStock,reorderleve,
-                CostPerCase,Price,sellingprice,Margin,outerbarcode,costprice,addbarcode,startDate,enddate,dd_price,ddpoints,manageStock,weight,capatitys;
+                saleWithVAT, discount, costPerCase, price, vat, margin, ageLimit,itemcode,Brand,UnitPerCase,currentstock,minStock,reorderleve,expiry_date,
+                CostPerCase,Price,sellingprice,Margin,Markup,outerbarcode,costprice,addbarcode,startDate,enddate,dd_price,ddpoints,manageStock,VatValue,
+                weight,capatitys,CasePrice,CaseUnit,Unit_scale;
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -222,6 +229,7 @@ public class BarCodeScanFragment extends Fragment {
                         Price=resultSet.getString("Price");
                         sellingprice=resultSet.getString("SS_PRICE");
                         Margin=resultSet.getString("Margin");
+                        Markup=resultSet.getString("Markup");
                         outerbarcode=resultSet.getString("OuterBarcode");
                         costprice=resultSet.getString("Price");
                         addbarcode=resultSet.getString("AdditionalBarcode1");
@@ -235,8 +243,11 @@ public class BarCodeScanFragment extends Fragment {
                         currentstock=resultSet.getString("CurrentStock");
                         minStock=resultSet.getString("MinStock");
                         reorderleve=resultSet.getString("ReorderLevel");
-
-
+                        expiry_date=resultSet.getString("Expiry_date");
+                        CasePrice=resultSet.getString("CasePrice");
+                        CaseUnit=resultSet.getString("CaseUnit");
+                        VatValue=resultSet.getString("VatValue");
+                        Unit_scale=resultSet.getString("Unit_scale");
 
                         Bundle bundle = new Bundle();
                         bundle.putString("plu", plu);
@@ -276,6 +287,12 @@ public class BarCodeScanFragment extends Fragment {
                         bundle.putString("MinStock", minStock);
                         bundle.putString("Reorderleve", reorderleve);
                         bundle.putString("Discount", discount);
+                        bundle.putString("Markup", Markup);
+                        bundle.putString("Expiry_date", expiry_date);
+                        bundle.putString("CasePrice", CasePrice);
+                        bundle.putString("CaseUnit", CaseUnit);
+                        bundle.putString("VatValue", VatValue);
+                        bundle.putString("Unit_scale", Unit_scale);
 
 
                         // Create the ProductManagmentEditFragment and set arguments
@@ -308,8 +325,7 @@ public class BarCodeScanFragment extends Fragment {
             return null;
         }
 
-
-
+        
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -319,7 +335,7 @@ public class BarCodeScanFragment extends Fragment {
                 requireActivity().runOnUiThread(() -> {
                     // Update the TextView with product details
 
-                    Toast.makeText(getContext(), "Product details updated", Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(getContext(), "Product details updated", Toast.LENGTH_SHORT).show();
                 });
                 isBarcodeDetected = false; // Reset detection for the next barcode scan
             }
@@ -330,71 +346,94 @@ public class BarCodeScanFragment extends Fragment {
     private class GetLastPLUTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
-            String lastPLU = null;
+            String largestPLU = null;
 
             try {
                 String connectionUrl = "jdbc:jtds:sqlserver://" + ipAddress1 + ":" + portNumber1 + "/" + databaseName1;
                 try (Connection connection = DriverManager.getConnection(connectionUrl, dbUsername1, dbPassword1)) {
-                    // SQL query to get the last PLU value
-                    String sql = "SELECT TOP 1 PLU FROM tbl_Products ORDER BY ID DESC"; // Assuming ID is auto-incremented
-                    try (PreparedStatement statement = connection.prepareStatement(sql);
+                    // First try to get the maximum numeric value
+                    String numericSql = "SELECT MAX(TRY_CAST(PLU AS INT)) AS maxPLU FROM tbl_Products WHERE TRY_CAST(PLU AS INT) IS NOT NULL";
+                    try (PreparedStatement statement = connection.prepareStatement(numericSql);
                          ResultSet resultSet = statement.executeQuery()) {
-
                         if (resultSet.next()) {
-                            lastPLU = resultSet.getString("PLU");
+                            largestPLU = resultSet.getString("maxPLU");
+                        }
+                    }
+
+                    // If no numeric PLUs found, get the maximum alphanumeric value
+                    if (largestPLU == null) {
+                        String alphaSql = "SELECT TOP 1 PLU FROM tbl_Products ORDER BY LEN(PLU) DESC, PLU DESC";
+                        try (PreparedStatement statement = connection.prepareStatement(alphaSql);
+                             ResultSet resultSet = statement.executeQuery()) {
+                            if (resultSet.next()) {
+                                largestPLU = resultSet.getString("PLU");
+                            }
                         }
                     }
                 }
             } catch (SQLException e) {
                 Log.e(TAG, "SQL Exception: " + e.getMessage(), e);
             }
-            return lastPLU;
+            return largestPLU;
         }
 
         @Override
         protected void onPostExecute(String result) {
-            if (result != null) {
-                // Do something with the last PLU, like updating the UI
-                Toast.makeText(requireActivity(), "Last PLU: " + result, Toast.LENGTH_LONG).show();
-
-                // Create a new Bundle to pass the barcode value
+            try {
                 Bundle bundle = new Bundle();
-                bundle.putString("barcode", barcodeValue); // Send the barcode value
-                bundle.putString("PLU", String.valueOf(Integer.parseInt(result)+1)); // Send the barcode value
+                bundle.putString("barcode", barcodeValue);
+                bundle.putString("fromProductmagementfullFragment", "fromProductmagementfullFragment");
 
-                // Create the ProductManagmentAddFragment and set arguments
+                int pluValue;
+                if (result != null && !result.trim().isEmpty()) {
+                    try {
+                        // Extract numeric part from the PLU (handles cases like "PLU123" or "00123")
+                        String numericPart = result.replaceAll("\\D", "");
+                        if (!numericPart.isEmpty()) {
+                            pluValue = Integer.parseInt(numericPart) + 1;
+                        } else {
+                            // If no numeric part found, use default
+                            pluValue = 3001;
+                        }
+                    } catch (NumberFormatException e) {
+                        pluValue = 3001; // Default value if parsing fails
+                    }
+                } else {
+                    // No PLUs in database, use default
+                    pluValue = 3001;
+                }
+
+                bundle.putString("PLU", String.valueOf(pluValue));
+
                 ProductManagmentAddFragment productManagementFragment = new ProductManagmentAddFragment();
-                productManagementFragment.setArguments(bundle); // Set the bundle with the barcode value
+                productManagementFragment.setArguments(bundle);
 
-                // Perform fragment transaction to display ProductManagmentAddFragment
-                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager()
+                FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
-                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
-
-
-
-            } else {
-                Toast.makeText(requireActivity(), "No PLU found.", Toast.LENGTH_LONG).show();
-
-                // Create a new Bundle to pass the barcode value
-                Bundle bundle = new Bundle();
-                bundle.putString("barcode", barcodeValue); // Send the barcode value
-                bundle.putString("PLU", "3001"); // Send the barcode value
-
-                // Create the ProductManagmentAddFragment and set arguments
-                ProductManagmentAddFragment productManagementFragment = new ProductManagmentAddFragment();
-                productManagementFragment.setArguments(bundle); // Set the bundle with the barcode value
-
-                // Perform fragment transaction to display ProductManagmentAddFragment
-                FragmentManager fragmentManager = getParentFragmentManager(); // Use getParentFragmentManager()
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, productManagementFragment);
-                fragmentTransaction.addToBackStack(null); // Optional: add to back stack
-                fragmentTransaction.commit();
+            } catch (Exception e) {
+                Log.e(TAG, "Error in onPostExecute: ", e);
+                Toast.makeText(requireActivity(), "Error occurred", Toast.LENGTH_SHORT).show();
             }
         }
     }
-}
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof AppCompatActivity) {
+            // Disable back press
+            ((AppCompatActivity) context).getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Do nothing to prevent back press
+                }
+            });
+        }
+    }
+ }

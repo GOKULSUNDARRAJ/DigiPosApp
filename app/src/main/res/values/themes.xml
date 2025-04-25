@@ -4,7 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
-        <item name="android:statusBarColor" tools:targetApi="l">@color/dgblue</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/blue1</item>
     </style>
 
     <style name="Theme.DigiposFinalApp" parent="Base.Theme.DigiposFinalApp" />
@@ -12,6 +12,9 @@
     <style name="ShapeAppearance.Capsule" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+    <style name="CustomCountryCodePickerStyle" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
 </resources>
